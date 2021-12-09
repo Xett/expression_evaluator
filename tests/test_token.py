@@ -1,5 +1,5 @@
 import unittest
-from expression_evaluator._token import *
+from expression_evaluator.token import *
 
 class TestTokenMethods(unittest.TestCase):
 

@@ -5,7 +5,7 @@ from __future__ import division
 
 import re
 
-from ._token import *
+from expression_evaluator.token import *
 
 class Expression:
     def __init__(self):
