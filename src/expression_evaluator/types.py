@@ -1,7 +1,6 @@
 from enum import Enum, IntFlag
 import math
-
-#from .__ops import *
+from dataclasses import dataclass
 
 class TokenType(Enum):
     TNUMBER = 0
@@ -27,6 +26,17 @@ class OperatorType(IntFlag):
     Function = 4
     Constant = 8
     Value = 16
+
+@dataclass(repr=True, eq=True, order=True, frozen=True)
+class Operator:
+    type: OperatorType = OperatorType.Basic
+
+    @property
+    def function(self):
+        return self._function
+
+    def __init__(self):
+        return
 
 #ops1 = {
 #    'sin': math.sin,

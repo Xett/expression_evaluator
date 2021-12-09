@@ -1,4 +1,4 @@
-from expression_evaluator.operator import *
+from expression_evaluator.types import *
 
 class Divide(Operator):
     label: str = 'div'

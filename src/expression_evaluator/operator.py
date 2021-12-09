@@ -1,33 +1,13 @@
-from dataclasses import dataclass
-import importlib
-
-from expression_evaluator.types import OperatorType
-
-@dataclass(repr=True, eq=True, order=True, frozen=True)
-class Operator:
-    type: OperatorType = OperatorType.Basic
-
-    @property
-    def function(self):
-        return self._function
-
-    def __init__(self):
-        return
+from expression_evaluator.types import *
+from expression_evaluator.operators import *
 
 class Operators:
     class _Operators:
         def __init__(self):
-            self.operators = {}
-            self.LoadOperators()
+            self.operators = Operator.__subclasses__()
 
-        def LoadOperators(self):
-            operators_module = importlib.import_module('.operators', package="expression_evaluator")
-            classes=dict([(name, cls) for name, cls in operators_module.__dict__.items() if isinstance(cls, type)])
-            for name, cls in classes:
-                self.operators[cls.symbol] = cls()
-
-        def Get(self, name):
-            return self.operators[name]
+        def Get(self, index):
+            return self.operators[index]
     
     instance = None
 
