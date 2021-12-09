@@ -112,3 +112,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Vagrant Cache
+.vagrant/
+
+# VS Code Cache
+.vscode/

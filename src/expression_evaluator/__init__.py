@@ -12,6 +12,3 @@
 # but don't feel like you have to let me know or ask permission.
 
 # Further modifications by SCG
-
-from .expression import *
-
