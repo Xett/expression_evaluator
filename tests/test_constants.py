@@ -20,3 +20,10 @@ class TestConstantsMethods(unittest.TestCase):
         self.assertIsInstance(ParseFlag.SIGN, ParseFlag)
         self.assertIsInstance(ParseFlag.CALL, ParseFlag)
         self.assertIsInstance(ParseFlag.NULLARY_CALL, ParseFlag)
+
+    def test_operator_types(self):
+        self.assertIsInstance(OperatorType.Basic, OperatorType)
+        self.assertIsInstance(OperatorType.Advanced, OperatorType)
+        self.assertIsInstance(OperatorType.Function, OperatorType)
+        self.assertIsInstance(OperatorType.Constant, OperatorType)
+        self.assertIsInstance(OperatorType.Value, OperatorType)

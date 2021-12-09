@@ -5,4 +5,4 @@ echo "Installing"
 python3 -m pip install /vagrant
 
 echo "Testing"
-python3 -m unittest discover -v
+python3 -m unittest discover -b
