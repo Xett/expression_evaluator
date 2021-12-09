@@ -8,6 +8,13 @@ class Operators:
 
         def Get(self, index):
             return self.operators[index]
+
+        def GetTypes(self, operator_type):
+            types = []
+            for operator in self.operators:
+                if operator_type in operator.type:
+                    types.append(operator)
+            return types
     
     instance = None
 
