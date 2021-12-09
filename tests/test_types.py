@@ -1,7 +1,7 @@
 import unittest
-from expression_evaluator.constants import *
+from expression_evaluator.types import *
 
-class TestConstantsMethods(unittest.TestCase):
+class TestTypesMethods(unittest.TestCase):
 
     def test_token_types(self):
         self.assertIsInstance(TokenType.TNUMBER, TokenType)

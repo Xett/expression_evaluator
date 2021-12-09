@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import importlib
 
-from expression_evaluator.constants import OperatorType
+from expression_evaluator.types import OperatorType
 
 @dataclass(repr=True, eq=True, order=True, frozen=True)
 class Operator:

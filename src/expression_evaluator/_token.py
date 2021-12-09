@@ -1,4 +1,4 @@
-from .constants import *
+from expression_evaluator.types import *
 
 class Token:
     def __init__(self, token_type: TokenType, index: int, priority: int, number: int):
