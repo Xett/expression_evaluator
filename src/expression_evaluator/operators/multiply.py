@@ -3,7 +3,7 @@ from expression_evaluator.types import *
 class Multiply(Operator):
     label: str = 'mul'
     description: str = 'multiply'
-    symbol: str = '*'
+    symbols: list = ['*']
 
 
     def _function(a, b):
