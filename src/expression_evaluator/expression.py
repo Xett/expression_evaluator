@@ -1,13 +1,12 @@
 
-from .parser import *
+from expression_evaluator.types import *
+from expression_evaluator.token import Token
+from expression_evaluator.parser import Parser
 
-class Expression():
+class Expression:
 
-    def __init__(self, tokens, ops1, ops2, functions):
+    def __init__(self, tokens):
         self.tokens = tokens
-        self.ops1 = ops1
-        self.ops2 = ops2
-        self.functions = functions
 
     def simplify(self, values):
         values = values or {}
@@ -17,21 +16,21 @@ class Expression():
         for i in range(0, L):
             item = self.tokens[i]
             type_ = item.type_
-            if type_ == TNUMBER:
+            if type_ == TokenType.TNUMBER:
                 nstack.append(item)
-            elif type_ == TVAR and item.index_ in values:
-                item = Token(TNUMBER, 0, 0, values[item.index_])
+            elif type_ == TokenType.TVAR and item.index_ in values:
+                item = Token(TokenType.TNUMBER, 0, 0, values[item.index_])
                 nstack.append(item)
-            elif type_ == TOP2 and len(nstack) > 1:
+            elif type_ == TokenType.TOP2 and len(nstack) > 1:
                 n2 = nstack.pop()
                 n1 = nstack.pop()
                 f = self.ops2[item.index_]
-                item = Token(TNUMBER, 0, 0, f(n1.number_, n2.number_))
+                item = Token(TokenType.TNUMBER, 0, 0, f(n1.number_, n2.number_))
                 nstack.append(item)
-            elif type_ == TOP1 and nstack:
+            elif type_ == TokenType.TOP1 and nstack:
                 n1 = nstack.pop()
                 f = self.ops1[item.index_]
-                item = Token(TNUMBER, 0, 0, f(n1.number_))
+                item = Token(TokenType.TNUMBER, 0, 0, f(n1.number_))
                 nstack.append(item)
             else:
                 while len(nstack) > 0:
@@ -50,7 +49,7 @@ class Expression():
         for i in range(0, L):
             item = self.tokens[i]
             type_ = item.type_
-            if type_ == TVAR and item.index_ == variable:
+            if type_ == TokenType.TVAR and item.index_ == variable:
                 for j in range(0, len(expr.tokens)):
                     expritem = expr.tokens[j]
                     replitem = Token(
@@ -72,25 +71,25 @@ class Expression():
         L = len(self.tokens)
         for item in self.tokens:
             type_ = item.type_
-            if type_ == TNUMBER:
+            if type_ == TokenType.TNUMBER:
                 nstack.append(item.number_)
-            elif type_ == TOP2:
+            elif type_ == TokenType.TOP2:
                 n2 = nstack.pop()
                 n1 = nstack.pop()
                 f = self.ops2[item.index_]
                 nstack.append(f(n1, n2))
-            elif type_ == TVAR:
+            elif type_ == TokenType.TVAR:
                 if item.index_ in values:
                     nstack.append(values[item.index_])
                 elif item.index_ in self.functions:
                     nstack.append(self.functions[item.index_])
                 else:
                     raise Exception('undefined variable: ' + item.index_)
-            elif type_ == TOP1:
+            elif type_ == TokenType.TOP1:
                 n1 = nstack.pop()
                 f = self.ops1[item.index_]
                 nstack.append(f(n1))
-            elif type_ == TFUNCALL:
+            elif type_ == TokenType.TFUNCALL:
                 n1 = nstack.pop()
                 f = nstack.pop()
                 if callable(f):
@@ -112,12 +111,12 @@ class Expression():
         for i in range(0, L):
             item = self.tokens[i]
             type_ = item.type_
-            if type_ == TNUMBER:
+            if type_ == TokenType.TNUMBER:
                 if type(item.number_) == str:
                     nstack.append("'"+item.number_+"'")
                 else:
                     nstack.append( item.number_)
-            elif type_ == TOP2:
+            elif type_ == TokenType.TOP2:
                 n2 = nstack.pop()
                 n1 = nstack.pop()
                 f = item.index_
@@ -135,16 +134,16 @@ class Expression():
                     ))
 
 
-            elif type_ == TVAR:
+            elif type_ == TokenType.TVAR:
                 nstack.append(item.index_)
-            elif type_ == TOP1:
+            elif type_ == TokenType.TOP1:
                 n1 = nstack.pop()
                 f = item.index_
                 if f == '-':
                     nstack.append('(' + f + str(n1) + ')')
                 else:
                     nstack.append(f + '(' + str(n1) + ')')
-            elif type_ == TFUNCALL:
+            elif type_ == TokenType.TFUNCALL:
                 n1 = nstack.pop()
                 f = nstack.pop()
                 nstack.append(f + '(' + n1 + ')')
@@ -161,7 +160,7 @@ class Expression():
         vars = []
         for i in range(0, len(self.tokens)):
             item = self.tokens[i]
-            if item.type_ == TVAR and not item.index_ in vars:
+            if item.type_ == TokenType.TVAR and not item.index_ in vars:
                 vars.append(item.index_)
         return vars
 

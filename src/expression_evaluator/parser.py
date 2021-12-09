@@ -148,7 +148,7 @@ class Parser:
         if (noperators + 1) != len(tokenstack):
             self.error_parsing(self.pos, 'parity')
 
-        return Expression(tokenstack, ops1, ops2, functions)
+        return Expression(tokenstack)
 
     def evaluate(self, expr, variables):
         return self.parse(expr).evaluate(variables)
@@ -394,7 +394,7 @@ class Parser:
                 if i == self.pos or (c != '_' and (c < '0' or c > '9')):
                     break
             str += c
-        if len(str) > 0 and (str in self.ops2):
+        if len(str) > 0 and (str in ops2):
             self.tokenindex = str
             self.tokenprio = 9
             self.pos += len(str)
