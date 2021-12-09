@@ -1,13 +1,7 @@
-from enum import IntFlag
 from dataclasses import dataclass
 import importlib
 
-class OperatorType(IntFlag):
-    Basic = 1
-    Advanced = 2
-    Function = 4
-    Constant = 8
-    Value = 16
+from expression_evaluator.constants import OperatorType
 
 @dataclass(repr=True, eq=True, order=True, frozen=True)
 class Operator:

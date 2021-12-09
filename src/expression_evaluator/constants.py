@@ -21,6 +21,13 @@ class ParseFlag(IntFlag):
     CALL = 128
     NULLARY_CALL = 256
 
+class OperatorType(IntFlag):
+    Basic = 1
+    Advanced = 2
+    Function = 4
+    Constant = 8
+    Value = 16
+
 #ops1 = {
 #    'sin': math.sin,
 #    'cos': math.cos,
