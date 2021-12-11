@@ -7,7 +7,7 @@ class Token:
     priority: int = 0
     value: int = 0
 
-    def __init__(self, token_id: int, value: int):
+    def __init__(self, token_id: int, value=0):
         self.token_id = token_id
         self.value = value
 
@@ -24,14 +24,12 @@ class Token:
 @dataclass(repr=True, eq=True, order=True, frozen=True)
 class Operator(Token):
     type: TokenType = TokenType.BasicOperator
+    is_sign: bool = False
     symbols = []
 
     @property
     def function(self):
         return self._function
-
-    def __init__(self):
-        return
 
 class TokenStack:
     def __init__(self):
