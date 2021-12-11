@@ -22,3 +22,9 @@ class TestParserMethod(unittest.TestCase):
 
     def test_parser_multiplication(self):
         self.parse("1 * 1", 3)
+
+    def test_parser_divide(self):
+        self.parse("1 / 1", 3)
+
+    def test_parser_module(self):
+        self.parse("5 % 2", 3)
