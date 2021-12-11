@@ -12,7 +12,6 @@ class Parser:
 
     def parse(self, expression):
         token_stack = TokenStack()
-        expected = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
 
         for token in ExpressionString(expression):
             if token is None:
