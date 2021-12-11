@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class TanDOperator(Operator):
-    label: str = 'tand'
-    description: str = 'tand'
+    type: TokenType = TokenType.AdvanceOperator
     symbols: list = ['tand']
-    type: OperatorType = OperatorType.Advanced
 
     def _function(a):
         return math.tan(math.radians(a))

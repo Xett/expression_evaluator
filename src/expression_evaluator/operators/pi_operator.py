@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class PIOperator(Operator):
-    label: str = 'PI'
-    description: str = 'PI'
+    type: TokenType = TokenType.Constant | TokenType.Variable
     symbols: list = ['PI']
-    type: OperatorType = OperatorType.Constant | OperatorType.Value
 
     def _function():
         return math.pi

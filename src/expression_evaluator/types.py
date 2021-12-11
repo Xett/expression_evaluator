@@ -1,13 +1,22 @@
 from enum import Enum, IntFlag
-import math
-from dataclasses import dataclass
 
-class TokenType(Enum):
-    TNUMBER = 0
-    TOP1 = 1
-    TOP2 = 2
-    TVAR = 3
-    TFUNCALL = 4
+class CharacterType(Enum):
+    String = 0
+    Number = 1
+    Constant = 2
+    Operator = 3
+    Whitespace = 4
+    Comma = 5
+    LeftParenthesis = 6
+    RightParenthesis = 7
+
+class TokenType(IntFlag):
+    Number = 1
+    BasicOperator = 2
+    AdvanceOperator = 4
+    Constant = 8
+    Variable = 16
+    Function = 32
 
 class ParseFlag(IntFlag):
     PRIMARY = 1
@@ -19,24 +28,6 @@ class ParseFlag(IntFlag):
     SIGN = 64
     CALL = 128
     NULLARY_CALL = 256
-
-class OperatorType(IntFlag):
-    Basic = 1
-    Advanced = 2
-    Function = 4
-    Constant = 8
-    Value = 16
-
-@dataclass(repr=True, eq=True, order=True, frozen=True)
-class Operator:
-    type: OperatorType = OperatorType.Basic
-
-    @property
-    def function(self):
-        return self._function
-
-    def __init__(self):
-        return
 
 #ops1 = {
 #    'sin': math.sin,

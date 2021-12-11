@@ -1,8 +1,6 @@
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Modulo(Operator):
-    label: str = 'mod'
-    description: str = 'modulo'
     symbols: list = ['%']
 
     def _function(a, b):

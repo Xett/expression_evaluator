@@ -1,9 +1,6 @@
-from expression_evaluator import *
-from expression_evaluator.types import Operator
+from expression_evaluator.token import *
 
 class OrOperator(Operator):
-    label: str = 'orOperator'
-    description: str = 'or operator'
     symbols: list = ['or']
 
     def _function(a, b):

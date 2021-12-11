@@ -1,9 +1,6 @@
-from expression_evaluator import *
-from expression_evaluator.types import Operator
+from expression_evaluator.token import *
 
 class LesserThan(Operator):
-    label: str = 'lesserThan'
-    description: str = 'lesser than'
     symbols: list = ['<']
 
     def _function(a, b):

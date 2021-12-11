@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class SquareRoot(Operator):
-    label: str = 'sqrt'
-    description: str = 'square root'
+    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
     symbols: list = ['sqrt']
-    type: OperatorType = OperatorType.Advanced | OperatorType.Value
 
     def _function(a):
         return math.sqrt(a)

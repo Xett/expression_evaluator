@@ -1,8 +1,6 @@
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Subtract(Operator):
-    label: str = 'sub'
-    description: str = 'subtraction'
     symbols: list = ['-']
 
     def _function(a, b):

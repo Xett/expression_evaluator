@@ -1,11 +1,8 @@
-from expression_evaluator import *
-from expression_evaluator.types import Operator, OperatorType
+from expression_evaluator.token import *
 
 class Concatenate(Operator):
-    label: str = 'concat'
-    description: str = 'concatenate'
+    type: TokenType = TokenType.BasicOperator | TokenType.Function
     symbols: list = ['||']
-    type: OperatorType = OperatorType.Basic | OperatorType.Function
 
     def _function(a, b,*args):
         result=u'{0}{1}'.format(a, b)

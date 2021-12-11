@@ -1,8 +1,6 @@
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Divide(Operator):
-    label: str = 'div'
-    description: str = 'divide'
     symbols: list = ['/']
 
     def _function(a, b):

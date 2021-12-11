@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class CosDOperator(Operator):
-    label: str = 'cosd'
-    description: str = 'cosd'
+    type: TokenType = TokenType.AdvanceOperator
     symbols: list = ['cosd']
-    type: OperatorType = OperatorType.Advanced
 
     def _function(a):
         return math.cos(math.radians(a))

@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class TanOperator(Operator):
-    label: str = 'tan'
-    description: str = 'tan'
+    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
     symbols: list = ['tan']
-    type: OperatorType = OperatorType.Advanced | OperatorType.Value
 
     def _function(a):
         return math.tan(a)

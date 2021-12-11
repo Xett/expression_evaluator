@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Factorial(Operator):
-    label: str = 'factorial'
-    description: str = 'factorial'
+    type: TokenType = TokenType.Function | TokenType.Variable
     symbols: list = ['fac']
-    type: OperatorType = OperatorType.Function | OperatorType.Value
 
     def _function(a):
         return math.factorial(a)

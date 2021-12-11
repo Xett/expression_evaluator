@@ -1,10 +1,8 @@
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Negative(Operator):
-    label: str = 'neg'
-    description: str = 'negative'
+    type: TokenType = TokenType.AdvanceOperator
     symbols: list = ['-']
-    type: OperatorType = OperatorType.Advanced
 
     def _function(a):
         return -a

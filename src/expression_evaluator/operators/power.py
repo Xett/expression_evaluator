@@ -1,8 +1,6 @@
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Power(Operator):
-    label: str = 'pow'
-    description: str = 'power'
     symbols: list = ['^', '**']
 
     def _function(a, b):

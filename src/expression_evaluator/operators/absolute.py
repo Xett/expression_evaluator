@@ -1,10 +1,8 @@
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Absolute(Operator):
-    label: str = 'abs'
-    description: str = 'absolute'
+    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
     symbols: list = ['abs']
-    type: OperatorType = OperatorType.Advanced | OperatorType.Value
 
     def _function(a):
         return abs(a)

@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class ATanTwo(Operator):
-    label: str = 'atan2'
-    description: str = 'math atan2'
+    type: TokenType = TokenType.Function | TokenType.Variable
     symbols: list = ['atan2']
-    type: OperatorType = OperatorType.Function | OperatorType.Value
 
     def _function(a):
         return math.atan2(a)

@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class ACosOperator(Operator):
-    label: str = 'acos'
-    description: str = 'acos'
+    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
     symbols: list = ['acos']
-    type: OperatorType = OperatorType.Advanced | OperatorType.Value
 
     def _function(a):
         return math.acos(a)

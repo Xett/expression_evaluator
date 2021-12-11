@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Exponential(Operator):
-    label: str = 'exp'
-    description: str = 'exponential'
+    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
     symbols: list = ['exp']
-    type: OperatorType = OperatorType.Advanced | OperatorType.Value
 
     def _function(a):
         return math.exp(a)

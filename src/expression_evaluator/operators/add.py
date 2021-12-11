@@ -1,8 +1,6 @@
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Add(Operator):
-    label: str = 'add'
-    description: str = 'addition'
     symbols: list = ['+']
 
     def _function(a, b):

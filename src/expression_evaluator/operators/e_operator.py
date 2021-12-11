@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class EOperator(Operator):
-    label: str = 'E'
-    description: str = 'E'
+    type: TokenType = TokenType.Constant | TokenType.Variable
     symbols: list = ['E']
-    type: OperatorType = OperatorType.Constant | OperatorType.Value
 
     def _function():
         return math.e

@@ -1,10 +1,8 @@
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class Maximum(Operator):
-    label: str = 'maximum'
-    description: str = 'maximum'
+    type: TokenType = TokenType.Function | TokenType.Variable
     symbols: list = ['max']
-    type: OperatorType = OperatorType.Function | OperatorType.Value
 
     def _function(a):
         return max(a)

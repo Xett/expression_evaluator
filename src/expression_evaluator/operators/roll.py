@@ -1,9 +1,7 @@
-from expression_evaluator.types import *
 import random
+from expression_evaluator.token import *
 
 class RollOperator(Operator):
-    label: str = 'roll'
-    description: str = 'roll'
     symbols: list = ['D']
 
     def _function(a, b):

@@ -1,11 +1,9 @@
 import math
-from expression_evaluator.types import *
+from expression_evaluator.token import *
 
 class SinDOperator(Operator):
-    label: str = 'sind'
-    description: str = 'sind'
+    type: TokenType = TokenType.AdvanceOperator
     symbols: list = ['sind']
-    type: OperatorType = OperatorType.Advanced
 
     def _function(a):
         return math.sin(math.radians(a))
