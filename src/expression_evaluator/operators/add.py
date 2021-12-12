@@ -1,9 +1,10 @@
 from expression_evaluator.token import *
 
 class Add(Operator):
-    is_sign: bool = True
-    symbols: list = ['+']
-    priority: int = 5
+    is_sign = True
+    symbols = ['+']
+    priority = 5
 
-    def _function(a, b):
+    @classmethod    
+    def _function(cls, a, b):
         return a + b

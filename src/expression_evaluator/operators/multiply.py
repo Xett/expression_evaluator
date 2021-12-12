@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class Multiply(Operator):
-    symbols: list = ['*']
-    priority: int = 5
+    symbols = ['*']
+    priority = 5
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         return a * b

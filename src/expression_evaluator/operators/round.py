@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class ASinDOperator(Operator):
-    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['round']
+    type = TokenType.AdvanceOperator | TokenType.Variable
+    symbols = ['round']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return round(a)

@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class ACosOperator(Operator):
-    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['acos']
+    type = TokenType.AdvanceOperator | TokenType.Variable
+    symbols = ['acos']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.acos(a)

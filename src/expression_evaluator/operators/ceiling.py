@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class Ceiling(Operator):
-    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['ceil']
+    type = TokenType.AdvanceOperator | TokenType.Variable
+    symbols = ['ceil']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.ceil(a)

@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class Factorial(Operator):
-    type: TokenType = TokenType.Function | TokenType.Variable
-    symbols: list = ['fac']
+    type = TokenType.Function | TokenType.Variable
+    symbols = ['fac']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.factorial(a)

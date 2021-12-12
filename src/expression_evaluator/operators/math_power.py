@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class MathPower(Operator):
-    type: TokenType = TokenType.Function | TokenType.Variable
-    symbols: list = ['pow']
+    type = TokenType.Function | TokenType.Variable
+    symbols = ['pow']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.pow(a)

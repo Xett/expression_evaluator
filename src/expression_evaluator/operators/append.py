@@ -1,9 +1,10 @@
 from expression_evaluator.token import *
 
 class Append(Operator):
-    symbols: list = [',']
+    symbols = [',']
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         if type(a) != list:
             return [a, b]
         a.append(b)

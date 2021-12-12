@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class Power(Operator):
-    symbols: list = ['^', '**']
-    priority: int = 8
+    symbols = ['^', '**']
+    priority = 8
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         return a ** b

@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class Divide(Operator):
-    symbols: list = ['/']
-    priority: int = 6
+    symbols = ['/']
+    priority = 6
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         return a / b

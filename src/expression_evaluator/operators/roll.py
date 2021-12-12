@@ -2,9 +2,10 @@ import random
 from expression_evaluator.token import *
 
 class RollOperator(Operator):
-    symbols: list = ['D']
+    symbols = ['D']
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         rolls = []
         roll = 0
         final = 0

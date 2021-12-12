@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class Floor(Operator):
-    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['floor']
+    type = TokenType.AdvanceOperator | TokenType.Variable
+    symbols = ['floor']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.floor(a)

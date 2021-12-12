@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class Subtract(Operator):
-    symbols: list = ['-']
-    priority: int = 4
+    symbols = ['-']
+    priority = 4
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         return a - b

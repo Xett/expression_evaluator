@@ -2,7 +2,8 @@ from expression_evaluator.token import *
 
 class Absolute(Operator):
     type = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['abs']
+    symbols = ['abs']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return abs(a)

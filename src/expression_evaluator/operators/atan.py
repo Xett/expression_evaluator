@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class ATanOperator(Operator):
-    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['atan']
+    type = TokenType.AdvanceOperator | TokenType.Variable
+    symbols = ['atan']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.atan(a)

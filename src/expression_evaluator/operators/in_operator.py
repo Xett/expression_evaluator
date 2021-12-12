@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class InOperator(Operator):
-    symbols: list = ['in']
-    priority: int = 3
+    symbols = ['in']
+    priority = 3
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         return a in b

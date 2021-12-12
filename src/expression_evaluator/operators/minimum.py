@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class Minimum(Operator):
-    type: TokenType = TokenType.Function | TokenType.Variable
-    symbols: list = ['min']
+    type = TokenType.Function | TokenType.Variable
+    symbols = ['min']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return min(a)

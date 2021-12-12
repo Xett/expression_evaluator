@@ -2,8 +2,9 @@ import random
 from expression_evaluator.token import *
 
 class Random(Operator):
-    type: TokenType = TokenType.Function | TokenType.Variable
-    symbols: list = ['random']
+    type = TokenType.Function | TokenType.Variable
+    symbols = ['random']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return random.random() * (a or 1)

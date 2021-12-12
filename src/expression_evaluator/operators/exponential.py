@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class Exponential(Operator):
-    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['exp']
+    type = TokenType.AdvanceOperator | TokenType.Variable
+    symbols = ['exp']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.exp(a)

@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class Pythagorus(Operator):
-    type: TokenType = TokenType.Function | TokenType.Variable
-    symbols: list = ['pyt']
+    type = TokenType.Function | TokenType.Variable
+    symbols = ['pyt']
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         return math.sqrt(a*a + b*b)

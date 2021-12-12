@@ -2,8 +2,10 @@ import math
 from expression_evaluator.token import *
 
 class CosDOperator(Operator):
-    type: TokenType = TokenType.AdvanceOperator
-    symbols: list = ['cosd']
+    type = TokenType.AdvanceOperator
+    symbols = ['cosd']
 
-    def _function(a):
+
+    @classmethod
+    def _function(cls, a):
         return math.cos(math.radians(a))

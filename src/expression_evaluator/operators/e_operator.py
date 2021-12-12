@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class EOperator(Operator):
-    type: TokenType = TokenType.Constant | TokenType.Variable
-    symbols: list = ['E']
+    type = TokenType.Constant | TokenType.Variable
+    symbols = ['E']
 
-    def _function():
+    @classmethod
+    def _function(cls):
         return math.e

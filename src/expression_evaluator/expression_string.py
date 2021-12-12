@@ -75,6 +75,9 @@ class ExpressionString:
         if constant: 
             if self.parse_flags and ParseFlag.PRIMARY == 0:
                 raise Exception("Unexpected Constant")
+            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
+            self.token_counter += 1
+            return Token(self.token_counter - 1, operator.function())
 
         variable = self.GetVariable()
         if variable: # Use get instead
@@ -145,6 +148,12 @@ class ExpressionString:
         return False
 
     def GetConstant(self):
+        for operator in Operators(TokenType.Constant):
+            for symbol in operator.symbols:
+                string = self.string[self.index:self.index+len(symbol)]
+                if symbol == string:
+                    self.index += len(symbol)
+                    return operator
         return False
 
     def GetVariable(self):

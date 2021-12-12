@@ -1,10 +1,11 @@
 from expression_evaluator.token import *
 
 class Negative(Operator):
-    type: TokenType = TokenType.AdvanceOperator
-    is_sign: bool = True
-    symbols: list = ['-']
-    priority: int = 5
+    type = TokenType.AdvanceOperator
+    is_sign = True
+    symbols = ['-']
+    priority = 5
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return -a

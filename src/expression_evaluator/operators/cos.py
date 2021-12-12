@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class CosOperator(Operator):
-    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['cos']
+    type = TokenType.AdvanceOperator | TokenType.Variable
+    symbols = ['cos']
     
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.cos(a)

@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class XorOperator(Operator):
-    symbols: list = ['xor']
-    priority: int = 0
+    symbols = ['xor']
+    priority = 0
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         return (a^b)

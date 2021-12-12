@@ -1,8 +1,9 @@
 from expression_evaluator.token import *
 
 class Equal(Operator):
-    symbols: list = ['==']
-    priority: int = 3
+    symbols = ['==']
+    priority = 3
 
-    def _function(a, b):
+    @classmethod
+    def _function(cls, a, b):
         return a == b

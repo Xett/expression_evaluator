@@ -24,12 +24,20 @@ class Token:
 @dataclass(repr=True, eq=True, order=True, frozen=True)
 class Operator(Token):
     type = TokenType.BasicOperator
-    is_sign: bool = False
+    is_sign = False
     symbols = []
+    priority = 0
 
-    @property
-    def function(self):
-        return self._function
+    def __init__(self, token_id):
+        super().__init__(token_id)
+
+    @classmethod
+    def function(cls):
+        return cls._function
+
+    @classmethod
+    def _function(cls):
+        raise Exception("Missing _function classmethod in Operator!")
 
 class TokenStack:
     def __init__(self):

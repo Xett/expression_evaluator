@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class ASinDOperator(Operator):
-    type: TokenType = TokenType.AdvanceOperator
-    symbols: list = ['asind']
+    type = TokenType.AdvanceOperator
+    symbols = ['asind']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.degrees(math.asin(a))

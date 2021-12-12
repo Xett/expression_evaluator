@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class PIOperator(Operator):
-    type: TokenType = TokenType.Constant | TokenType.Variable
-    symbols: list = ['PI']
+    type = TokenType.Constant | TokenType.Variable
+    symbols = ['PI']
 
-    def _function():
+    @classmethod
+    def _function(cls):
         return math.pi

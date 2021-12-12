@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class SquareRoot(Operator):
-    type: TokenType = TokenType.AdvanceOperator | TokenType.Variable
-    symbols: list = ['sqrt']
+    type = TokenType.AdvanceOperator | TokenType.Variable
+    symbols = ['sqrt']
 
-    def _function(a):
+    @classmethod
+    def _function(cls, a):
         return math.sqrt(a)

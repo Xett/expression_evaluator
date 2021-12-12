@@ -2,8 +2,9 @@ import math
 from expression_evaluator.token import *
 
 class IfOperator(Operator):
-    type: TokenType = TokenType.Function
-    symbols: list = ['if']
+    type = TokenType.Function
+    symbols = ['if']
 
-    def _function(a, b, c):
+    @classmethod
+    def _function(cls, a, b, c):
         return b if a else c
