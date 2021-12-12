@@ -80,7 +80,7 @@ class ExpressionString:
             return Token(self.token_counter - 1, operator.function())
 
         variable = self.GetVariable()
-        if variable: # Use get instead
+        if variable:
             if self.parse_flags and ParseFlag.PRIMARY == 0:
                 raise Exception("Unexpected Variable")
 
