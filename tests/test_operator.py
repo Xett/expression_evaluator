@@ -6,33 +6,33 @@ class TestOperatorsMethods(unittest.TestCase):
     fail_messages = [
         "Operators Initialising Failed!",
         "No Operators loaded!",
-        "No Basic Operators!",
-        "No Advanced Operators!",
-        "No Function Operators!",
+        "Unexpected number of Basic Operators!",
+        "Unexpected number of Advanced Operators!",
+        "Unexpected number of Function Operators!",
         "Unexpected number of Constant Operators!",
-        "No Value Operators!"
+        "Unexpected number of Variable Operators!"
     ]
     
     def test_creation(self):
         self.assertIsNotNone(operator.Operators(), self.fail_messages[0])
 
     def test_operators_loaded(self):
-        self.assertGreater(len(operator.Operators().operators), 0, self.fail_messages[1])
+        self.assertGreater(len(operator.Operators()), 0, self.fail_messages[1])
 
     def test_basic_operators_loaded(self):
-        self.assertGreater(len(operator.Operators(TokenType.BasicOperator)), 0, self.fail_messages[2])
+        self.assertEqual(len(operator.Operators(TokenType.BasicOperator)), 19, self.fail_messages[2])
 
     def test_advanced_operators_loaded(self):
-        self.assertGreater(len(operator.Operators(TokenType.AdvanceOperator)), 0, self.fail_messages[3])
+        self.assertEqual(len(operator.Operators(TokenType.AdvanceOperator)), 20, self.fail_messages[3])
 
     def test_function_operators_loaded(self):
-        self.assertGreater(len(operator.Operators(TokenType.Function)), 0, self.fail_messages[4])
+        self.assertEqual(len(operator.Operators(TokenType.Function)), 10, self.fail_messages[4])
     
     def test_constant_operators_loaded(self):
         self.assertEqual(len(operator.Operators(TokenType.Constant)), 2, self.fail_messages[5])
     
     def test_value_operators_loaded(self):
-        self.assertGreater(len(operator.Operators(TokenType.Variable)), 0, self.fail_messages[6])
+        self.assertEqual(len(operator.Operators(TokenType.Variable)), 22, self.fail_messages[6])
 
     def test_add_operator_exists(self):
         self.assertIsNotNone(operator.Operators().Get('+'))
