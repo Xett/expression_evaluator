@@ -5,7 +5,6 @@ class Operators:
     class _Operators:
         def __init__(self):
             self.operators = Operator.__subclasses__()
-            self.type = TokenType.BasicOperator | TokenType.AdvanceOperator | TokenType.Constant | TokenType.Variable | TokenType.Function
             self.index = 0
 
         def Get(self, symbol):
@@ -14,14 +13,15 @@ class Operators:
                     return operator
             return None
 
-        def __len__(self):
-            if len(self.operators) == 0:
-                return 0
-            operators = 0
+        def GetByType(self, type):
+            operators = []
             for operator in self.operators:
-                if operator.type and self.type:
-                    operators += 1
+                if operator.type & type:
+                    operators.append(operator)
             return operators
+
+        def __len__(self):
+            return len(self.operators)
 
         def __iter__(self):
             self.index = 0
@@ -32,20 +32,19 @@ class Operators:
                 raise StopIteration
 
             self.index += 1
-            if self.type and self.operators[self.index - 1].type:
-                return self.operators[self.index - 1]
-            return self.__next__()
+            return self.operators[self.index - 1]
     
     instance = None
+
+    def __new__(cls, type=-1):
+        if type == -1 or not Operators.instance:
+            return super(Operators, cls).__new__(cls)
+        else:
+            return Operators.instance.GetByType(type)
 
     def __init__(self, type=-1):
         if not Operators.instance:
             Operators.instance = Operators._Operators()
-
-        if type == -1:
-            Operators.instance.type = TokenType.BasicOperator | TokenType.AdvanceOperator | TokenType.Constant | TokenType.Variable | TokenType.Function
-        else:
-            Operators.instance.type = type
 
     def __getattr__(self, name):
         return getattr(self.instance, name)

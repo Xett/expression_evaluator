@@ -21,7 +21,7 @@ class ExpressionString:
         # Check for basic operators first
         operator = self.GetOperator()
         if operator:
-            
+            print(operator.type)
             # If we are expection a sign (+/-)
             # We only need to check for -
             if self.parse_flags and ParseFlag.SIGN > 0:
@@ -104,7 +104,7 @@ class ExpressionString:
         return self.string[self.index] == ','
 
     def GetOperator(self):
-        for operator in Operators(type=TokenType.BasicOperator):
+        for operator in Operators(TokenType.BasicOperator):
             for symbol in operator.symbols:
                 if self.string.startswith(symbol, self.index):
                     self.index += len(symbol)

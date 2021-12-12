@@ -9,7 +9,7 @@ class TestOperatorsMethods(unittest.TestCase):
         "No Basic Operators!",
         "No Advanced Operators!",
         "No Function Operators!",
-        "No Constant Operators!",
+        "Unexpected number of Constant Operators!",
         "No Value Operators!"
     ]
     
@@ -29,7 +29,7 @@ class TestOperatorsMethods(unittest.TestCase):
         self.assertGreater(len(operator.Operators(TokenType.Function)), 0, self.fail_messages[4])
     
     def test_constant_operators_loaded(self):
-        self.assertGreater(len(operator.Operators(TokenType.Constant)), 0, self.fail_messages[5])
+        self.assertEqual(len(operator.Operators(TokenType.Constant)), 2, self.fail_messages[5])
     
     def test_value_operators_loaded(self):
         self.assertGreater(len(operator.Operators(TokenType.Variable)), 0, self.fail_messages[6])

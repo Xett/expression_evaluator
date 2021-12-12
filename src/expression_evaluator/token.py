@@ -2,7 +2,7 @@ from expression_evaluator.types import *
 from dataclasses import dataclass
 
 class Token:
-    type: TokenType = TokenType.Number
+    type = TokenType.Number
     token_id: int = 0
     priority: int = 0
     value: int = 0
@@ -23,7 +23,7 @@ class Token:
 
 @dataclass(repr=True, eq=True, order=True, frozen=True)
 class Operator(Token):
-    type: TokenType = TokenType.BasicOperator
+    type = TokenType.BasicOperator
     is_sign: bool = False
     symbols = []
 
