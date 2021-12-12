@@ -20,11 +20,11 @@ class ExpressionString:
         initial_index = self.index
         # Check for basic operators first
         operator = self.GetOperator()
-        if operator and TokenType.BasicOperator in operator.type:
+        if operator:
             
             # If we are expection a sign (+/-)
             # We only need to check for -
-            if self.parse_flags and ParseFlag.SIGN:
+            if self.parse_flags and ParseFlag.SIGN > 0:
                 # Check for - sign
                 if operator.is_sign and '-' in operator.symbols:
                         # Set the parse flags
@@ -33,18 +33,23 @@ class ExpressionString:
                         token = operator(self.token_counter - 1)
                         token.priority = 5
                         return token
-                
             self.token_counter += 1
             return operator(self.token_counter-1)
 
         # Check for numbers
         number = self.GetNumber()
-        if not isinstance(number, bool) and (self.parse_flags and ParseFlag.PRIMARY):
+        if not isinstance(number, bool):
+            if self.parse_flags and ParseFlag.PRIMARY == 0:
+                raise Exception("Unexpected Number")
             self.token_counter += 1
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
             return Token(self.token_counter-1, number)
 
-        # Check for string
+        # Check for 
+        string = self.GetString()
+        if string:
+            if self.parse_flags and ParseFlag.PRIMARY == 0:
+                raise Exception("Unexpected String")
 
         # Check for left parenthesis
         while self.IsLeftParenthesis():
@@ -56,14 +61,29 @@ class ExpressionString:
                 self.index += 1
 
         # Check for right parenthesis
+        while self.IsRightParenthesis():
+            if self.parse_flags and ParseFlag.RPAREN == 0:
+                raise Exception("Unexpected \")\"")
 
         # Check for comma
+        while self.IsComma():
+            if self.parse_flags and ParseFlag.COMMA == 0:
+                raise Exception("Unexpected \",\"")
 
         # Check for constants
+        constant = self.GetConstant()
+        if constant: 
+            if self.parse_flags and ParseFlag.PRIMARY == 0:
+                raise Exception("Unexpected Constant")
+
+        variable = self.GetVariable()
+        if variable: # Use get instead
+            if self.parse_flags and ParseFlag.PRIMARY == 0:
+                raise Exception("Unexpected Variable")
 
         
         # Step forward while we are on whitespace
-        while self.IsWhitespace():
+        if self.IsWhitespace():
             self.index += 1
 
         if initial_index != self.index:
@@ -80,8 +100,11 @@ class ExpressionString:
     def IsRightParenthesis(self):
         return self.string[self.index] == ')'
 
+    def IsComma(self):
+        return self.string[self.index] == ','
+
     def GetOperator(self):
-        for operator in Operators().operators:
+        for operator in Operators(type=TokenType.BasicOperator):
             for symbol in operator.symbols:
                 if self.string.startswith(symbol, self.index):
                     self.index += len(symbol)
@@ -117,3 +140,12 @@ class ExpressionString:
                 return number
             except ValueError:
                 return False
+
+    def GetString(self):
+        return False
+
+    def GetConstant(self):
+        return False
+
+    def GetVariable(self):
+        return False

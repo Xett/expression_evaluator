@@ -3,6 +3,7 @@ from expression_evaluator.token import *
 class Concatenate(Operator):
     type: TokenType = TokenType.BasicOperator | TokenType.Function
     symbols: list = ['||']
+    priority: int = 3
 
     def _function(a, b,*args):
         result=u'{0}{1}'.format(a, b)
