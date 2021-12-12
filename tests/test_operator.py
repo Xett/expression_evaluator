@@ -1,6 +1,7 @@
 import unittest
 from expression_evaluator import operator
 from expression_evaluator.types import *
+import math
 
 class TestOperatorsMethods(unittest.TestCase):
     fail_messages = [
@@ -67,3 +68,7 @@ class TestOperatorsMethods(unittest.TestCase):
 
     def test_lesser_than_equal_operator_loaded(self):
         self.assertIsNotNone(operator.Operators().Get('<='))
+
+    def test_pi_operator_loaded(self):
+        self.assertIsNotNone(operator.Operators().Get('PI'))
+        self.assertEqual(operator.Operators().Get('PI').function(), math.pi)

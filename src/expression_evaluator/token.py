@@ -33,7 +33,7 @@ class Operator(Token):
 
     @classmethod
     def function(cls):
-        return cls._function
+        return cls._function()
 
     @classmethod
     def _function(cls):
