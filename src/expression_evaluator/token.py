@@ -4,7 +4,7 @@ from dataclasses import dataclass
 class Token:
     type = TokenType.Number
     token_id: int = 0
-    priority: int = 0
+    priority = 0
     value: int = 0
 
     def __init__(self, token_id: int, scope_level, value=0):

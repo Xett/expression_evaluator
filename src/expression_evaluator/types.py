@@ -1,15 +1,5 @@
 from enum import Enum, IntFlag
 
-class CharacterType(Enum):
-    String = 0
-    Number = 1
-    Constant = 2
-    Operator = 3
-    Whitespace = 4
-    Comma = 5
-    LeftParenthesis = 6
-    RightParenthesis = 7
-
 class TokenType(IntFlag):
     INVALID = 0
     Number = 1

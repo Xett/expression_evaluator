@@ -13,22 +13,21 @@ class Expression:
         return self.token_stack
 
     def evaluate(self, **kwargs):
-        evaluation_stack = []
+        evaluation_stack = [] # Holds the numbers we use to evaluate
         values = kwargs
         for token in self:
             if token.type & TokenType.Number:
                 evaluation_stack.append(token.value)
             elif token.type & TokenType.BasicOperator:
-                n2 = evaluation_stack.pop(0)
-                n1 = evaluation_stack.pop(0)
+                print(evaluation_stack)
+                n2 = evaluation_stack.pop()
+                n1 = evaluation_stack.pop()
                 evaluation_stack.append(token.function(n1, n2))
             elif token.type & TokenType.Variable:
                 return
             elif token.type & TokenType.AdvanceOperator:
                 n1 = evaluation_stack.pop()
                 evaluation_stack.append(token.function(n1))
-            elif token.type & TokenType.Function:
-                return
             else:
                 raise Exception("Invalid Expression!")
         return evaluation_stack[0]

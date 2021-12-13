@@ -9,8 +9,9 @@ class Operators:
 
         def Get(self, symbol):
             for operator in self.operators:
-                if symbol in operator.symbols:
-                    return operator
+                for _symbol in operator.symbols:
+                    if symbol == _symbol:
+                        return operator
             return None
 
         def GetByType(self, type):
@@ -18,7 +19,7 @@ class Operators:
             for operator in self.operators:
                 if operator.type & type:
                     operators.append(operator)
-            return operators
+            return sorted(operators, key=lambda x : x.priority, reverse=True)
 
         def __len__(self):
             return len(self.operators)

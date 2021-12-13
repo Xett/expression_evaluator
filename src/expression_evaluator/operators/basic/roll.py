@@ -3,6 +3,7 @@ from expression_evaluator.token import *
 
 class RollOperator(BasicOperator):
     symbols = ['D']
+    priority = 1
 
     @classmethod
     def _function(cls, a, b):

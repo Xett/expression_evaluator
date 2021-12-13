@@ -82,7 +82,7 @@ class ExpressionString:
         if self.IsLeftParenthesis():
             if not (self.parse_flags & ParseFlag.LPAREN):
                 raise Exception("Unexpected \"(\"")
-            elif self.parse_flags & ParseFlag.CALL:
+            elif self.parse_flags & ParseFlag.CALL_START:
                 self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN | ParseFlag.CALL_END
                 self.scope_level += 1
                 self.index += 1
