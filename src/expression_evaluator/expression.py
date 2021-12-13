@@ -19,7 +19,6 @@ class Expression:
             if token.type & TokenType.Number:
                 evaluation_stack.append(token.value)
             elif token.type & TokenType.BasicOperator:
-                print(evaluation_stack)
                 n2 = evaluation_stack.pop()
                 n1 = evaluation_stack.pop()
                 evaluation_stack.append(token.function(n1, n2))
