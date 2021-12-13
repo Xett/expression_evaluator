@@ -1,7 +1,6 @@
 from expression_evaluator.token import *
 
-class Negative(Operator):
-    type = TokenType.AdvanceOperator
+class Negative(AdvanceOperator):
     is_sign = True
     symbols = ['-']
     priority = 5

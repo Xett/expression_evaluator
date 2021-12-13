@@ -1,7 +1,6 @@
 from expression_evaluator.token import *
 
-class Maximum(Operator):
-    type = TokenType.Function | TokenType.Variable
+class Maximum(AdvanceOperator):
     symbols = ['max']
 
     @classmethod

@@ -1,7 +1,7 @@
 import random
 from expression_evaluator.token import *
 
-class RollOperator(Operator):
+class RollOperator(BasicOperator):
     symbols = ['D']
 
     @classmethod

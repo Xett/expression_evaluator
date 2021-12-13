@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class Pythagorus(Operator):
-    type = TokenType.Function | TokenType.Variable
+class Pythagorus(BasicOperator):
     symbols = ['pyt']
 
     @classmethod

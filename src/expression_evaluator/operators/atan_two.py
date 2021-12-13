@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class ATanTwo(Operator):
-    type = TokenType.Function | TokenType.Variable
+class ATanTwo(AdvanceOperator):
     symbols = ['atan2']
 
     @classmethod

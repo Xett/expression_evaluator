@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class AndOperator(Operator):
+class AndOperator(BasicOperator):
     symbols = ['and']
     priority = 1
 

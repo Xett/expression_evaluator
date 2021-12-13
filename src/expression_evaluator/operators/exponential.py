@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class Exponential(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class Exponential(AdvanceOperator):
     symbols = ['exp']
 
     @classmethod

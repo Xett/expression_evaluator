@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class Logarithm(Operator):
-    type = TokenType.Function | TokenType.Variable
+class Logarithm(AdvanceOperator):
     symbols = ['log']
 
     @classmethod

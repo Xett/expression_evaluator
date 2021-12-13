@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class Floor(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class Floor(AdvanceOperator):
     symbols = ['floor']
 
     @classmethod

@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class Ceiling(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class Ceiling(AdvanceOperator):
     symbols = ['ceil']
 
     @classmethod

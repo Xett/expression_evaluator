@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class Factorial(Operator):
-    type = TokenType.Function | TokenType.Variable
+class Factorial(AdvanceOperator):
     symbols = ['fac']
 
     @classmethod

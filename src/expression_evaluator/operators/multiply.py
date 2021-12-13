@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class Multiply(Operator):
+class Multiply(BasicOperator):
     symbols = ['*']
     priority = 5
 

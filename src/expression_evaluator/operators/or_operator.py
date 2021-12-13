@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class OrOperator(Operator):
+class OrOperator(BasicOperator):
     symbols = ['or']
     priority = 0
 

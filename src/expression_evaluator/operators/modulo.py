@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class Modulo(Operator):
+class Modulo(BasicOperator):
     symbols = ['%']
     priority = 6
 

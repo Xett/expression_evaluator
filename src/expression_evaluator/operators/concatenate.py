@@ -1,7 +1,6 @@
 from expression_evaluator.token import *
 
-class Concatenate(Operator):
-    type: TokenType = TokenType.BasicOperator | TokenType.Function
+class Concatenate(BasicOperator):
     symbols = ['||']
     priority = 3
 

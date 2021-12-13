@@ -11,12 +11,12 @@ class CharacterType(Enum):
     RightParenthesis = 7
 
 class TokenType(IntFlag):
+    INVALID = 0
     Number = 1
     BasicOperator = 2
     AdvanceOperator = 4
     Constant = 8
     Variable = 16
-    Function = 32
 
 class ParseFlag(IntFlag):
     PRIMARY = 1
@@ -26,8 +26,8 @@ class ParseFlag(IntFlag):
     RPAREN = 16
     COMMA = 32
     SIGN = 64
-    CALL = 128
-    NULLARY_CALL = 256
+    CALL_START = 128
+    CALL_END = 256
 
 #ops1 = {
 #    'sin': math.sin,

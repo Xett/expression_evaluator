@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class Subtract(Operator):
+class Subtract(BasicOperator):
     symbols = ['-']
     priority = 4
 

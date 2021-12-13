@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class Append(Operator):
+class Append(BasicOperator):
     symbols = [',']
 
     @classmethod

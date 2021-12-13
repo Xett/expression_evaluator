@@ -4,7 +4,7 @@ from expression_evaluator.operators import *
 class Operators:
     class _Operators:
         def __init__(self):
-            self.operators = Operator.__subclasses__()
+            self.operators = BasicOperator.__subclasses__() + AdvanceOperator.__subclasses__() + ConstantOperator.__subclasses__()
             self.index = 0
 
         def Get(self, symbol):

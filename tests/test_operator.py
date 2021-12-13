@@ -21,19 +21,16 @@ class TestOperatorsMethods(unittest.TestCase):
         self.assertGreater(len(operator.Operators()), 0, self.fail_messages[1])
 
     def test_basic_operators_loaded(self):
-        self.assertEqual(len(operator.Operators(TokenType.BasicOperator)), 19, self.fail_messages[2])
+        self.assertEqual(len(operator.Operators(TokenType.BasicOperator)), 20, self.fail_messages[2])
 
     def test_advanced_operators_loaded(self):
-        self.assertEqual(len(operator.Operators(TokenType.AdvanceOperator)), 20, self.fail_messages[3])
-
-    def test_function_operators_loaded(self):
-        self.assertEqual(len(operator.Operators(TokenType.Function)), 10, self.fail_messages[4])
+        self.assertEqual(len(operator.Operators(TokenType.AdvanceOperator)), 28, self.fail_messages[3])
     
     def test_constant_operators_loaded(self):
         self.assertEqual(len(operator.Operators(TokenType.Constant)), 2, self.fail_messages[5])
     
     def test_value_operators_loaded(self):
-        self.assertEqual(len(operator.Operators(TokenType.Variable)), 22, self.fail_messages[6])
+        self.assertEqual(len(operator.Operators(TokenType.Variable)), 0, self.fail_messages[6])
 
     def test_add_operator_exists(self):
         self.assertIsNotNone(operator.Operators().Get('+'))

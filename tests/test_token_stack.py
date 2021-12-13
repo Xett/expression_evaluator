@@ -49,7 +49,7 @@ class TokenStackTestMethods(unittest.TestCase):
         token_2.priority = 1
         token_stack.add(token_2)
 
-        self.assertEqual(token_stack.priority_order(), [1, 0])
+        self.assertEqual(token_stack.priority_order(), [0, 1])
 
     def test_current_priority(self):
         token_1 = Token(0, 0)

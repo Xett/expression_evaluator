@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class CosDOperator(Operator):
-    type = TokenType.AdvanceOperator
+class CosDOperator(AdvanceOperator):
     symbols = ['cosd']
 
 

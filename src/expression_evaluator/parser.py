@@ -13,7 +13,7 @@ class Parser:
     def parse(self, expression):
         token_stack = TokenStack()
 
-        for token in ExpressionString(expression):
+        for token in ExpressionString(expression, self.string_literal_quotes):
             if token is None:
                 continue
             token_stack.add(token)
@@ -21,6 +21,7 @@ class Parser:
         return token_stack
         
         #while position < len(expression):            
+        
         #    if self.isOperator():
         #        if self.isSign() and expected & ParseFlag.SIGN:
         #            if self.isNegativeSign():
@@ -43,18 +44,21 @@ class Parser:
         #            noperators += 2
         #            self.addfunc(token_stack, operator_stack, TokenType.TOP2)
         #            expected = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
+        
         #    elif self.isNumber():
         #        if expected and ParseFlag.PRIMARY == 0:
         #            self.error_parsing(position, 'unexpected number')
         #        token = Token(TokenType.TNUMBER, 0, 0, self.tokennumber)
         #        token_stack.append(token)
         #        expected = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
+        
         #    elif self.isString():
         #        if (expected & ParseFlag.PRIMARY) == 0:
         #            self.error_parsing(position, 'unexpected string')
         #        token = Token(TokenType.TNUMBER, 0, 0, self.tokennumber)
         #        token_stack.append(token)
         #        expected = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
+        
         #    elif self.isLeftParenth():
         #        if (expected & ParseFlag.LPAREN) == 0:
         #            self.error_parsing(position, 'unexpected \"(\"')
@@ -66,6 +70,7 @@ class Parser:
         #        expected = \
         #            ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | \
         #            ParseFlag.SIGN | ParseFlag.NULLARY_CALL
+        
         #    elif self.isRightParenth():
         #        if expected & ParseFlag.NULLARY_CALL:
         #            token = Token(TokenType.TNUMBER, 0, 0, [])
@@ -75,6 +80,7 @@ class Parser:
         #        expected = \
         #            ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | \
         #            ParseFlag.LPAREN | ParseFlag.CALL
+        
         #    elif self.isComma():
         #        if (expected & ParseFlag.COMMA) == 0:
         #            self.error_parsing(position, 'unexpected \",\"')
@@ -82,24 +88,28 @@ class Parser:
         #        noperators += 2
         #        expected = \
         #            ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
+        
         #    elif self.isConst():
         #        if (expected & ParseFlag.PRIMARY) == 0:
         #            self.error_parsing(position, 'unexpected constant')
         #        consttoken = Token(TokenType.TNUMBER, 0, 0, self.tokennumber)
         #        token_stack.append(consttoken)
         #        expected = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
+        
         #    elif self.isOp2():
         #        if (expected & ParseFlag.FUNCTION) == 0:
         #            self.error_parsing(position, 'unexpected function')
         #        self.addfunc(token_stack, operator_stack, TokenType.TOP2)
         #        noperators += 2
         #        expected = ParseFlag.LPAREN
+        
         #    elif self.isOp1():
         #        if (expected & ParseFlag.FUNCTION) == 0:
         #            self.error_parsing(position, 'unexpected function')
         #        self.addfunc(token_stack, operator_stack, TokenType.TOP1)
         #        noperators += 1
         #        expected = ParseFlag.LPAREN
+        
         #    elif self.isVar():
         #        if (expected & ParseFlag.PRIMARY) == 0:
         #            self.error_parsing(position, 'unexpected variable')
@@ -108,17 +118,22 @@ class Parser:
         #        expected = \
         #            ParseFlag.OPERATOR | ParseFlag.RPAREN | \
         #            ParseFlag.COMMA | ParseFlag.LPAREN | ParseFlag.CALL
+        
         #    elif self.isWhite():
         #        pass
+        
         #    else:
         #        if self.errormsg == '':
         #            self.error_parsing(expression, position, 'unknown character')
         #        else:
         #            self.error_parsing(expression, position, self.errormsg)
+        
         #if temp_priority < 0 or temp_priority >= 10:
         #    self.error_parsing(expression, position, 'unmatched \"()\"')
+        
         #while len(operator_stack) > 0:
         #    token_stack.append(operator_stack.pop())
+        
         #if (noperators + 1) != len(token_stack):
         #    self.error_parsing(expression, position, 'parity')
 

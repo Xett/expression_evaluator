@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class InOperator(Operator):
+class InOperator(BasicOperator):
     symbols = ['in']
     priority = 3
 

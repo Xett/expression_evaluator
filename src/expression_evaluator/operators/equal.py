@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class Equal(Operator):
+class Equal(BasicOperator):
     symbols = ['==']
     priority = 3
 

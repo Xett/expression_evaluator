@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class MathPower(Operator):
-    type = TokenType.Function | TokenType.Variable
+class MathPower(AdvanceOperator):
     symbols = ['pow']
 
     @classmethod

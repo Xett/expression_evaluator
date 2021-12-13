@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class PIOperator(Operator):
-    type = TokenType.Constant | TokenType.Variable
+class PIOperator(ConstantOperator):
     symbols = ['PI']
 
     @classmethod

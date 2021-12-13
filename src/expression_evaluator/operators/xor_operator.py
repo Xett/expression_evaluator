@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class XorOperator(Operator):
+class XorOperator(BasicOperator):
     symbols = ['xor']
     priority = 0
 

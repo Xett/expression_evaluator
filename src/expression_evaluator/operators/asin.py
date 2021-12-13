@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class ASinOperator(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class ASinOperator(AdvanceOperator):
     symbols = ['asin']
     
     @classmethod

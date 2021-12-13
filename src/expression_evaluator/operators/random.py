@@ -1,8 +1,7 @@
 import random
 from expression_evaluator.token import *
 
-class Random(Operator):
-    type = TokenType.Function | TokenType.Variable
+class Random(AdvanceOperator):
     symbols = ['random']
 
     @classmethod

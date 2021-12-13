@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class SinDOperator(Operator):
-    type = TokenType.AdvanceOperator
+class SinDOperator(AdvanceOperator):
     symbols = ['sind']
 
     @classmethod

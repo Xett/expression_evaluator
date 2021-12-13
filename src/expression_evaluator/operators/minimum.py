@@ -1,7 +1,6 @@
 from expression_evaluator.token import *
 
-class Minimum(Operator):
-    type = TokenType.Function | TokenType.Variable
+class Minimum(AdvanceOperator):
     symbols = ['min']
 
     @classmethod

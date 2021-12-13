@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class Add(Operator):
+class Add(BasicOperator):
     is_sign = True
     symbols = ['+']
     priority = 5

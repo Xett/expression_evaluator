@@ -1,7 +1,6 @@
 from expression_evaluator.token import *
 
-class Absolute(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class Absolute(AdvanceOperator):
     symbols = ['abs']
 
     @classmethod

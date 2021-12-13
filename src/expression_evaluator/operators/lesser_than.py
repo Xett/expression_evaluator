@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class LesserThan(Operator):
+class LesserThan(BasicOperator):
     symbols = ['<']
     priority = 3
 

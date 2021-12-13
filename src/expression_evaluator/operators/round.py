@@ -1,7 +1,6 @@
 from expression_evaluator.token import *
 
-class ASinDOperator(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class ASinDOperator(AdvanceOperator):
     symbols = ['round']
 
     @classmethod

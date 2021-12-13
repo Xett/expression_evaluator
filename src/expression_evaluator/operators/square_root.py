@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class SquareRoot(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class SquareRoot(AdvanceOperator):
     symbols = ['sqrt']
 
     @classmethod

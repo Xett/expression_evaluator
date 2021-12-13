@@ -1,6 +1,7 @@
 from expression_evaluator.types import *
 from expression_evaluator.token import *
 from expression_evaluator.parser import Parser
+from expression_evaluator.operator import *
 
 class Expression:
 
@@ -15,21 +16,22 @@ class Expression:
         evaluation_stack = []
         values = kwargs
         for token in self:
-            if token.type == TokenType.Number:
+            if token.type & TokenType.Number:
                 evaluation_stack.append(token.value)
-            elif token.type == TokenType.Constant:
+            elif token.type & TokenType.BasicOperator:
+                n2 = evaluation_stack.pop(0)
+                n1 = evaluation_stack.pop(0)
+                evaluation_stack.append(token.function(n1, n2))
+            elif token.type & TokenType.Variable:
                 return
-            elif token.type == TokenType.AdvanceOperator:
-                return
-            elif token.type == TokenType.Variable:
-                return
-            elif token.type == TokenType.BasicOperator:
-                return
-            elif token.type == TokenType.Function:
+            elif token.type & TokenType.AdvanceOperator:
+                n1 = evaluation_stack.pop()
+                evaluation_stack.append(token.function(n1))
+            elif token.type & TokenType.Function:
                 return
             else:
-                return #error
-        return evaluation_stack
+                raise Exception("Invalid Expression!")
+        return evaluation_stack[0]
 
 #    def evaluate(self, values={}):
 #        nstack = []

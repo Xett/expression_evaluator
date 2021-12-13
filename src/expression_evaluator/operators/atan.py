@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class ATanOperator(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class ATanOperator(AdvanceOperator):
     symbols = ['atan']
 
     @classmethod

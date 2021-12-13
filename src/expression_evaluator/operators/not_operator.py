@@ -1,7 +1,6 @@
 from expression_evaluator.token import *
 
-class NotOperator(Operator):
-    type = TokenType.AdvanceOperator
+class NotOperator(AdvanceOperator):
     symbols = ['not']
     priority = 2
 

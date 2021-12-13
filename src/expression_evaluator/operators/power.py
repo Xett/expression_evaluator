@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class Power(Operator):
+class Power(BasicOperator):
     symbols = ['^', '**']
     priority = 8
 

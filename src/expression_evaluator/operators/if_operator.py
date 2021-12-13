@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class IfOperator(Operator):
-    type = TokenType.Function
+class IfOperator(AdvanceOperator):
     symbols = ['if']
 
     @classmethod

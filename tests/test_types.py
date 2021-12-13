@@ -8,7 +8,6 @@ class TestTypesMethods(unittest.TestCase):
         self.assertIsInstance(TokenType.BasicOperator, TokenType)
         self.assertIsInstance(TokenType.AdvanceOperator, TokenType)
         self.assertIsInstance(TokenType.Variable, TokenType)
-        self.assertIsInstance(TokenType.Function, TokenType)
         self.assertIsInstance(TokenType.Constant, TokenType)
 
     def test_parse_flags(self):
@@ -19,5 +18,5 @@ class TestTypesMethods(unittest.TestCase):
         self.assertIsInstance(ParseFlag.RPAREN, ParseFlag)
         self.assertIsInstance(ParseFlag.COMMA, ParseFlag)
         self.assertIsInstance(ParseFlag.SIGN, ParseFlag)
-        self.assertIsInstance(ParseFlag.CALL, ParseFlag)
-        self.assertIsInstance(ParseFlag.NULLARY_CALL, ParseFlag)
+        self.assertIsInstance(ParseFlag.CALL_START, ParseFlag)
+        self.assertIsInstance(ParseFlag.CALL_END, ParseFlag)

@@ -1,6 +1,6 @@
-from expression_evaluator.token import Operator
+from expression_evaluator.token import *
 
-class GreaterThanEqual(Operator):
+class GreaterThanEqual(BasicOperator):
     symbols = ['>=']
     priority = 3
 

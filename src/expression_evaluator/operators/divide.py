@@ -1,6 +1,6 @@
 from expression_evaluator.token import *
 
-class Divide(Operator):
+class Divide(BasicOperator):
     symbols = ['/']
     priority = 6
 

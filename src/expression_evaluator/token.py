@@ -7,37 +7,48 @@ class Token:
     priority: int = 0
     value: int = 0
 
-    def __init__(self, token_id: int, value=0):
+    def __init__(self, token_id: int, scope_level, value=0):
         self.token_id = token_id
         self.value = value
+        self.priority += scope_level * 10
 
     def __str__(self):
         if self.type == TokenType.Number:
             return str(self.value)
         if self.type == TokenType.BasicOperator or self.type == TokenType.Variable:
             return str(self.token_id)
-        elif self.type == TokenType.Function:
-            return 'CALL'
+        #elif self.type == TokenType.Function:
+        #    return 'CALL'
         else:
             return 'Invalid Token'
 
-@dataclass(repr=True, eq=True, order=True, frozen=True)
 class Operator(Token):
-    type = TokenType.BasicOperator
+    type = TokenType.INVALID
     is_sign = False
     symbols = []
-    priority = 0
 
-    def __init__(self, token_id):
-        super().__init__(token_id)
-
-    @classmethod
-    def function(cls):
-        return cls._function()
+    def __init__(self, token_id, scope_level):
+        super().__init__(token_id, scope_level)
 
     @classmethod
-    def _function(cls):
+    def function(cls, *args):
+        return cls._function(*args)
+
+    @classmethod
+    def _function(cls, *args):
         raise Exception("Missing _function classmethod in Operator!")
+
+class BasicOperator(Operator):
+    type = TokenType.BasicOperator
+
+class AdvanceOperator(Operator):
+    type = TokenType.AdvanceOperator
+
+class ConstantOperator(Operator):
+    type = TokenType.Constant
+
+class VariableOperator(Operator):
+    type = TokenType.Variable
 
 class TokenStack:
     def __init__(self):
@@ -76,7 +87,7 @@ class TokenStack:
             return token
 
     def priority_order(self):
-        return sorted(self.stack.keys(), reverse=True)
+        return sorted(self.stack.keys())
 
     def current_priority(self):
         if self.priority_index >= len(self.priority_order()):

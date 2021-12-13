@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class TanOperator(Operator):
-    type = TokenType.AdvanceOperator | TokenType.Variable
+class TanOperator(AdvanceOperator):
     symbols = ['tan']
 
     @classmethod    

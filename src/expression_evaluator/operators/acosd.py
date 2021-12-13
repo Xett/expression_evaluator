@@ -1,8 +1,7 @@
 import math
 from expression_evaluator.token import *
 
-class ACosDOperator(Operator):
-    type = TokenType.AdvanceOperator
+class ACosDOperator(AdvanceOperator):
     symbols = ['acosd']
 
     @classmethod
