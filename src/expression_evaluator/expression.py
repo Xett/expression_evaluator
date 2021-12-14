@@ -16,6 +16,7 @@ class Expression:
         evaluation_stack = [] # Holds the numbers we use to evaluate
         values = kwargs
         for token in self:
+            print(token)
             if token.type == TokenType.Number:
                 evaluation_stack.append(token.value)
             elif token.type == TokenType.BasicOperator:
@@ -23,7 +24,8 @@ class Expression:
                 n1 = evaluation_stack.pop()
                 evaluation_stack.append(token.function(n1, n2))
             elif token.type == TokenType.Variable:
-                return
+                if token.variable_name in values.keys():
+                    evaluation_stack.append(values[token.variable_name])
             elif token.type == TokenType.AdvanceOperator:
                 n1 = evaluation_stack.pop()
                 evaluation_stack.append(token.function(n1))

@@ -22,47 +22,41 @@ class ExpressionString:
                 raise Exception("Unmatched \"()\"")
             raise StopIteration
         
-        # Check for basic operators first
-        basic_operator = self.GetBasicOperator()
-        if basic_operator:
-            # If we are expection a sign (+/-)
-            # We only need to check for -
-            if self.parse_flags & ParseFlag.SIGN:
-                # Check for - sign
-                if basic_operator.is_sign and '-' in basic_operator.symbols:
-                    # Set the parse flags
-                    self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
-                    self.token_counter += 1
-                    token = basic_operator(self.token_counter - 1, self.scope_level)
-                    return token
-            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
-
-            # elif is logical not         
-            self.token_counter += 1
-            token = basic_operator(self.token_counter-1, self.scope_level)
-            return token
-
-        advance_operator = self.GetAdvanceOperator()
-        if advance_operator:
-            if not (self.parse_flags & ParseFlag.OPERATOR):
-                return
+        # Step forward if we are on whitespace
+        if self.IsWhitespace():
+            self.index += 1
+            return self.__next__()
+        
+        # Check for 
+        string = self.GetString()
+        if string:
+            return self.__next__()
 
         # Check for numbers
         number = self.GetNumber()
         if not isinstance(number, bool):
             if not (self.parse_flags & ParseFlag.PRIMARY):
                 raise Exception("Unexpected Number")
-            self.token_counter += 1
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
+            self.token_counter += 1
             if number.isdecimal():
                 return Token(self.token_counter-1, self.scope_level, int(number))
             return Token(self.token_counter-1, self.scope_level, float(number))
 
-        # Check for 
-        string = self.GetString()
-        if string:
-            if not (self.parse_flags & ParseFlag.PRIMARY):
-                raise Exception("Unexpected String")
+        # Check for basic operators first
+        basic_operator = self.GetBasicOperator()
+        if basic_operator:
+            if not (self.parse_flags & ParseFlag.OPERATOR):
+                raise Exception('Unexpected Basic Operator')
+            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN    
+            self.token_counter += 1
+            token = basic_operator(self.token_counter-1, self.scope_level)
+            return token
+
+        #advance_operator = self.GetAdvanceOperator()
+        #if advance_operator:
+        #    if not (self.parse_flags & ParseFlag.OPERATOR):
+        #        raise Exception('Unexpected Advance Operator')
 
         # Check for left parenthesis
         if self.IsLeftParenthesis():
@@ -108,11 +102,6 @@ class ExpressionString:
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN
             return token
 
-        # Step forward if we are on whitespace
-        if self.IsWhitespace():
-            self.index += 1
-            return self.__next__()
-        
         raise Exception('Invalid character! - ' + self.string[self.index])
 
     def IsWhitespace(self):
@@ -172,18 +161,20 @@ class ExpressionString:
     def GetString(self):
         start_index = self.index
         string = ''
-        #if self.string[self.index] in self.string_literal_quotes:
-        #    quote_type = self.string[self.index]
-        #    self.index += 1
-        #    while self.index < len(self.string):
-        #        current_character = self.string[self.index]
-        #        if current_character != quote_type or (string != '' and string[-1] == '\\'):
-        #            string += self.string[self.index]
-        #            self.index += 1
-        #        else:
-        #            self.index += 1
-        #            # token number? value?
-        #            return string
+        if self.string[self.index] in self.string_literal_quotes:
+            quote_type = self.string[self.index]
+            self.index += 1
+
+            while self.index < len(self.string):
+                current_character = self.string[self.index]
+                self.index += 1
+                if current_character != quote_type or (string != '' and string[-1] == '\\'):
+                    string += current_character
+                else:
+                    break
+        if len(string) > 0:
+            print(self.string[self.index])
+            return True
         self.index = start_index 
         return False
 

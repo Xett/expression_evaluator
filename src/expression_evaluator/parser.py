@@ -14,8 +14,6 @@ class Parser:
         token_stack = TokenStack()
 
         for token in ExpressionString(expression, self.string_literal_quotes):
-            if token is None:
-                continue
             token_stack.add(token)
         
         return token_stack
@@ -136,38 +134,6 @@ class Parser:
         
         #if (noperators + 1) != len(token_stack):
         #    self.error_parsing(expression, position, 'parity')
-
-    #def isNumber(self):
-    #    r = False
-
-    #    if self.expression[self.pos] == 'E':
-    #        return False
-
-        # number in scientific notation
-    #    pattern = r'([-+]?([0-9]*\.?[0-9]*)[eE][-+]?[0-9]+).*'
-    #    match = re.match(pattern, self.expression[self.pos: ])
-    #    if match:
-    #        self.pos += len(match.group(1))
-    #        self.tokennumber = float(match.group(1))
-    #        return True
-
-        # number in decimal
-    #    str = ''
-    #    while self.pos < len(self.expression):
-    #        code = self.expression[self.pos]
-    #        if (code >= '0' and code <= '9') or code == '.':
-    #            if (len(str) == 0 and code == '.' ):
-    #                str = '0'
-    #            str += code
-    #            self.pos += 1
-    #            try:
-    #                self.tokennumber = int(str)
-    #            except ValueError:
-    #                self.tokennumber = float(str)
-    #            r = True
-    #        else:
-    #            break
-    #    return r
 
     #def unescape(self, v, pos):
     #    buffer = []

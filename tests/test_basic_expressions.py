@@ -29,3 +29,6 @@ class BasicExpressionTestMethods(unittest.TestCase):
 
     def test_pi(self):
         self.assertEqual(Expression('PI').evaluate()[0], math.pi)
+
+    def test_comment(self):
+        self.assertEqual(Expression("'test' 1 + 1").evaluate(), [2])
