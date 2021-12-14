@@ -16,7 +16,6 @@ class Expression:
         evaluation_stack = [] # Holds the numbers we use to evaluate
         values = kwargs
         for token in self:
-            print(token)
             if token.type == TokenType.Number:
                 evaluation_stack.append(token.value)
             elif token.type == TokenType.BasicOperator:
@@ -34,45 +33,6 @@ class Expression:
             else:
                 raise Exception("Invalid Expression!")
         return evaluation_stack
-
-#    def evaluate(self, values={}):
-#        nstack = []
-#        L = len(self.tokens)
-#        for item in self.tokens:
-#            type_ = item.type_
-#            if type_ == TokenType.TNUMBER:
-#                nstack.append(item.number_)
-#            elif type_ == TokenType.TOP2:
-#                n2 = nstack.pop()
-#                n1 = nstack.pop()
-#                f = self.ops2[item.index_]
-#                nstack.append(f(n1, n2))
-#            elif type_ == TokenType.TVAR:
-#                if item.index_ in values:
-#                    nstack.append(values[item.index_])
-#                elif item.index_ in self.functions:
-#                    nstack.append(self.functions[item.index_])
-#                else:
-#                    raise Exception('undefined variable: ' + item.index_)
-#            elif type_ == TokenType.TOP1:
-#                n1 = nstack.pop()
-#                f = self.ops1[item.index_]
-#                nstack.append(f(n1))
-#            elif type_ == TokenType.TFUNCALL:
-#                n1 = nstack.pop()
-#                f = nstack.pop()
-#                if callable(f):
-#                    if type(n1) is list:
-#                        nstack.append(f(*n1))
-#                    else:
-#                        nstack.append(f(n1))
-#                else:
-#                    raise Exception(f + ' is not a function')
-#            else:
-#                raise Exception('invalid Expression')
-#        if len(nstack) > 1:
-#            raise Exception('invalid Expression (parity)')
-#        return nstack[0]
 
 #    def simplify(self, values):
 #        values = values or {}

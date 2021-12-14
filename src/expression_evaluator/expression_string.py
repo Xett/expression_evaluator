@@ -53,10 +53,14 @@ class ExpressionString:
             token = basic_operator(self.token_counter-1, self.scope_level)
             return token
 
-        #advance_operator = self.GetAdvanceOperator()
-        #if advance_operator:
-        #    if not (self.parse_flags & ParseFlag.OPERATOR):
-        #        raise Exception('Unexpected Advance Operator')
+        advance_operator = self.GetAdvanceOperator()
+        if advance_operator:
+            if not (self.parse_flags & ParseFlag.OPERATOR):
+                raise Exception('Unexpected Advance Operator')
+            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
+            self.token_counter += 1
+            token = advance_operator(self.token_counter - 1, self.scope_level)
+            return token
 
         # Check for left parenthesis
         if self.IsLeftParenthesis():
@@ -173,7 +177,6 @@ class ExpressionString:
                 else:
                     break
         if len(string) > 0:
-            print(self.string[self.index])
             return True
         self.index = start_index 
         return False
