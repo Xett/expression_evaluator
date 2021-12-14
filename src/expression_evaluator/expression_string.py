@@ -1,9 +1,9 @@
 import re
-from expression_evaluator.operators import basic
 from expression_evaluator.token import *
 from expression_evaluator.operator import *
 
 class ExpressionString:
+    default_parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
     def __init__(self, string, values, string_literal_quotes):
         self.string = string
         self.values = values
@@ -13,7 +13,7 @@ class ExpressionString:
         self.index = 0
         self.token_counter = 0
         self.scope_level = 0
-        self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
+        self.parse_flags = self.default_parse_flags
         return self
 
     def __next__(self):
@@ -49,7 +49,7 @@ class ExpressionString:
         if basic_operator:
             if not (self.parse_flags & ParseFlag.OPERATOR):
                 raise Exception('Unexpected Basic Operator')
-            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN    
+            self.parse_flags = self.default_parse_flags   
             self.token_counter += 1
             token = basic_operator(self.token_counter-1, self.scope_level)
             return token
@@ -58,7 +58,7 @@ class ExpressionString:
         if advance_operator:
             if not (self.parse_flags & ParseFlag.OPERATOR):
                 raise Exception('Unexpected Advance Operator')
-            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
+            self.parse_flags = self.default_parse_flags
             self.token_counter += 1
             token = advance_operator(self.token_counter - 1, self.scope_level)
             return token
@@ -69,7 +69,7 @@ class ExpressionString:
                 raise Exception("Unexpected \"(\"")
             self.scope_level += 1
             self.index += 1
-            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
+            self.parse_flags = self.default_parse_flags
             return self.__next__()
 
         # Check for right parenthesis
