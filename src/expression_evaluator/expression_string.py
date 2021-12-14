@@ -80,8 +80,6 @@ class ExpressionString:
         if self.IsLeftParenthesis():
             if not (self.parse_flags & ParseFlag.LPAREN):
                 raise Exception("Unexpected \"(\"")
-            elif self.parse_flags & ParseFlag.CALL_START:
-                self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN | ParseFlag.CALL_END
             self.scope_level += 1
             self.index += 1
             self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN | ParseFlag.CALL_END
@@ -91,13 +89,6 @@ class ExpressionString:
         if self.IsRightParenthesis():
             if not (self.parse_flags & ParseFlag.RPAREN):
                 raise Exception("Unexpected \")\"")
-            elif self.parse_flags & ParseFlag.CALL_END:
-                self.token_counter += 1
-                self.scope_level -= 1
-                self.index += 1
-                token = Token(self.token_counter - 1, self.scope_level)
-                self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN | ParseFlag.CALL_START
-                return token
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN | ParseFlag.CALL_START
             self.scope_level -= 1
             self.index += 1
@@ -117,15 +108,15 @@ class ExpressionString:
                 raise Exception("Unexpected Constant")
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
             self.token_counter += 1
-            token = Token(self.token_counter - 1, self.scope_level, constant.function())
-            token.priority += self.scope_level * 10
+            token = constant(self.token_counter - 1, self.scope_level)
             return token
 
         variable = self.GetVariable()
         if variable:
             if not (self.parse_flags & ParseFlag.PRIMARY):
                 raise Exception("Unexpected Variable")
-            token = Token()
+            self.token_counter += 1
+            token = variable(self.token_counter - 1, self.scope_level)
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN | ParseFlag.CALL_START
             return token
 

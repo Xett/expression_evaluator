@@ -46,11 +46,9 @@ class AdvanceOperator(Operator):
 
 class ConstantOperator(Operator):
     type = TokenType.Constant
-    priority = 9
 
 class VariableOperator(Operator):
     type = TokenType.Variable
-    priority = 9
 
 class TokenStack:
     def __init__(self):

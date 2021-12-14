@@ -27,6 +27,8 @@ class Expression:
             elif token.type & TokenType.AdvanceOperator:
                 n1 = evaluation_stack.pop()
                 evaluation_stack.append(token.function(n1))
+            elif token.type & TokenType.Constant:
+                evaluation_stack.append(token.function())
             else:
                 raise Exception("Invalid Expression!")
         return evaluation_stack
