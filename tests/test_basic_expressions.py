@@ -26,3 +26,6 @@ class BasicExpressionTestMethods(unittest.TestCase):
 
     def test_scope_parenthesis(self):
         self.assertEqual(Expression('1 + (2 * 5)').evaluate()[0], 11)
+
+    def test_pi(self):
+        self.assertEqual(Expression('PI').evaluate()[0], math.pi)
