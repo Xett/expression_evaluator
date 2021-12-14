@@ -22,14 +22,31 @@ class ExpressionString:
             if self.scope_level != 0:
                 raise Exception("Unmatched \"()\"")
             raise StopIteration
-        print(self.parse_flags)
         
         # Step forward if we are on whitespace
         if self.IsWhitespace():
             self.index += 1
             return self.__next__()
-        
 
+        # Check for left parenthesis
+        if self.IsLeftParenthesis():
+            if not (self.parse_flags & ParseFlag.LPAREN):
+                raise Exception("Unexpected \"(\"")
+            self.scope_level += 1
+            self.index += 1
+            self.parse_flags = self.default_parse_flags
+            print(self.parse_flags)
+            return self.__next__()
+
+        # Check for right parenthesis
+        if self.IsRightParenthesis():
+            if not (self.parse_flags & ParseFlag.RPAREN):
+                raise Exception("Unexpected \")\"")
+            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN
+            self.scope_level -= 1
+            self.index += 1
+            return self.__next__()
+        
         # Check for basic operators first
         basic_operator = self.GetBasicOperator()
         if basic_operator:
@@ -53,30 +70,13 @@ class ExpressionString:
         number = self.GetNumber()
         if not isinstance(number, bool):
             if not (self.parse_flags & ParseFlag.PRIMARY):
+                print(self.parse_flags)
                 raise Exception("Unexpected Number")
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
             self.token_counter += 1
             if number.isdecimal():
                 return Token(self.token_counter-1, self.scope_level, int(number))
             return Token(self.token_counter-1, self.scope_level, float(number))
-
-        # Check for left parenthesis
-        if self.IsLeftParenthesis():
-            if not (self.parse_flags & ParseFlag.LPAREN):
-                raise Exception("Unexpected \"(\"")
-            self.scope_level += 1
-            self.index += 1
-            self.parse_flags = self.default_parse_flags
-            return self.__next__()
-
-        # Check for right parenthesis
-        if self.IsRightParenthesis():
-            if not (self.parse_flags & ParseFlag.RPAREN):
-                raise Exception("Unexpected \")\"")
-            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN
-            self.scope_level -= 1
-            self.index += 1
-            return self.__next__()
 
         # Check for comma
         if self.IsComma():
@@ -146,10 +146,18 @@ class ExpressionString:
 
     def GetNumber(self):
         # Check for scientific notation numbers
-        scientific_notation = re.match(r'([-+]?([0-9]*\.?[0-9]*)[eE][-+]?[0-9]+).*', self.string[self.index:])
-        if scientific_notation:
-            self.index += len(scientific_notation)
-            return scientific_notation.group(1)
+        index = 0
+        number = ''
+        string = self.string[self.index:]
+        while index < len(string):
+            if str(string[index]).isdigit() or str(string[index]) == '.':
+                number += string[index]
+                index += 1
+            else:
+                break
+        if len(number) > 0:
+            self.index += len(number)
+            return number
 
         # Check for decimal numbers
         decimal_string = ''
