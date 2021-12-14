@@ -1,5 +1,6 @@
 import unittest
 import unittest.mock
+from expression_evaluator.token_stack import *
 from expression_evaluator.token import *
 
 class TokenStackTestMethods(unittest.TestCase):

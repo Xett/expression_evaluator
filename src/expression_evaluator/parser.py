@@ -1,6 +1,7 @@
 from expression_evaluator.token import *
 from expression_evaluator.operator import *
 from expression_evaluator.expression_string import *
+from expression_evaluator.token_stack import *
 
 class Parser:
 
@@ -188,25 +189,6 @@ class Parser:
     #
     #    return ''.join(buffer)
 
-    #def isString(self):
-    #    r = False
-    #    str = ''
-    #    startpos = self.pos
-    #    if self.pos < len(self.expression) and self.expression[self.pos] in self.string_literal_quotes:
-    #        quote_type = self.expression[self.pos]
-    #        self.pos += 1
-    #        while self.pos < len(self.expression):
-    #            code = self.expression[self.pos]
-    #            if code != quote_type or (str != '' and str[-1] == '\\'):
-    #                str += self.expression[self.pos]
-    #                self.pos += 1
-    #            else:
-    #                self.pos += 1
-    #                self.tokennumber = self.unescape(str, startpos)
-    #                r = True
-    #                break
-    #    return r
-
     #def isConst(self):
     #    for i in self.consts:
     #        L = len(i)
@@ -222,35 +204,12 @@ class Parser:
     #                return True
     #    return False
 
-    #def isLeftParenth(self):
-    #    code = self.expression[self.pos]
-    #    if code == '(':
-    #        self.pos += 1
-    #        self.tmpprio += 10
-    #        return True
-    #    return False
-
-    #def isRightParenth(self):
-    #    code = self.expression[self.pos]
-    #    if code == ')':
-    #        self.pos += 1
-    #        self.tmpprio -= 10
-    #        return True
-    #    return False
-
     #def isComma(self):
     #    code = self.expression[self.pos]
     #    if code==',':
     #        self.pos+=1
     #        self.tokenprio=-1
     #        self.tokenindex=","
-    #        return True
-    #    return False
-
-    #def isWhite(self):
-    #    code = self.expression[self.pos]
-    #    if code.isspace():
-    #        self.pos += 1
     #        return True
     #    return False
 
@@ -299,13 +258,5 @@ class Parser:
     #        self.tokenindex = str
     #        self.tokenprio = 6
     #        self.pos += len(str)
-    #        return True
-    #    return False
-
-    #def isComment(self, expression, position):
-    #    if expression[position - 1] == '/' and expression[position] == '*':
-    #        position = expression.index('*/', position) + 2
-    #        if position == 1:
-    #            position = len(expression)
     #        return True
     #    return False
