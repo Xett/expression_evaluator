@@ -13,7 +13,6 @@ class TestTypesMethods(unittest.TestCase):
     def test_parse_flags(self):
         self.assertIsInstance(ParseFlag.PRIMARY, ParseFlag)
         self.assertIsInstance(ParseFlag.OPERATOR, ParseFlag)
-        self.assertIsInstance(ParseFlag.FUNCTION, ParseFlag)
         self.assertIsInstance(ParseFlag.LPAREN, ParseFlag)
         self.assertIsInstance(ParseFlag.RPAREN, ParseFlag)
         self.assertIsInstance(ParseFlag.COMMA, ParseFlag)

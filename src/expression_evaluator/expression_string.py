@@ -12,7 +12,7 @@ class ExpressionString:
         self.index = 0
         self.token_counter = 0
         self.scope_level = 0
-        self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
+        self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
         return self
 
     def __next__(self):
@@ -31,11 +31,11 @@ class ExpressionString:
                 # Check for - sign
                 if basic_operator.is_sign and '-' in basic_operator.symbols:
                     # Set the parse flags
-                    self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
+                    self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
                     self.token_counter += 1
                     token = basic_operator(self.token_counter - 1, self.scope_level)
                     return token
-            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
+            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
 
             # elif is logical not         
             self.token_counter += 1
@@ -44,7 +44,7 @@ class ExpressionString:
 
         advance_operator = self.GetAdvanceOperator()
         if advance_operator:
-            if not (self.parse_flags & ParseFlag.FUNCTION):
+            if not (self.parse_flags & ParseFlag.OPERATOR):
                 return
 
         # Check for numbers
@@ -54,21 +54,9 @@ class ExpressionString:
                 raise Exception("Unexpected Number")
             self.token_counter += 1
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
-            int_num = 0
-            float_num = 0.0
-            try:
-                int_num = int(number)
-            except:
-                try:
-                    float_num = float(number)
-                except:
-                    pass
-                else:
-                    token = Token(self.token_counter-1, self.scope_level, float_num)
-                    return token
-            else:
-                token = Token(self.token_counter-1, self.scope_level, int_num)
-                return token
+            if number.isdecimal():
+                return Token(self.token_counter-1, self.scope_level, int(number))
+            return Token(self.token_counter-1, self.scope_level, float(number))
 
         # Check for 
         string = self.GetString()
@@ -82,7 +70,7 @@ class ExpressionString:
                 raise Exception("Unexpected \"(\"")
             self.scope_level += 1
             self.index += 1
-            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
+            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
             return self.__next__()
 
         # Check for right parenthesis
@@ -162,7 +150,6 @@ class ExpressionString:
     def GetNumber(self):
         # Check for scientific notation numbers
         scientific_notation = re.match(r'([-+]?([0-9]*\.?[0-9]*)[eE][-+]?[0-9]+).*', self.string[self.index:])
-        number = False
         if scientific_notation:
             self.index += len(scientific_notation)
             return scientific_notation.group(1)

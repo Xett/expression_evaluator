@@ -11,11 +11,10 @@ class TokenType(IntEnum):
 class ParseFlag(IntFlag):
     PRIMARY = 1
     OPERATOR = 2
-    FUNCTION = 4
-    LPAREN = 8
-    RPAREN = 16
-    COMMA = 32
-    SIGN = 64
+    LPAREN = 4
+    RPAREN = 8
+    COMMA = 16
+    SIGN = 32
 
 class PriorityLevel(IntEnum):
     Operator = 0
