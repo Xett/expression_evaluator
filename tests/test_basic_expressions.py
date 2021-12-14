@@ -34,3 +34,7 @@ class BasicExpressionTestMethods(unittest.TestCase):
         self.assertEqual(Expression("'test' 1 + 1").evaluate(), [2])
         self.assertEqual(Expression("1 + 'test'1").evaluate(), [2])
         self.assertEqual(Expression("1 'test'+ 1").evaluate(), [2])
+
+    def test_variable(self):
+        kwargs = {'a' : 1}
+        self.assertEqual(Expression("a + 1", **kwargs).evaluate(), [2])

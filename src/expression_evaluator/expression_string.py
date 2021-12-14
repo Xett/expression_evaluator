@@ -4,8 +4,9 @@ from expression_evaluator.token import *
 from expression_evaluator.operator import *
 
 class ExpressionString:
-    def __init__(self, string, string_literal_quotes):
+    def __init__(self, string, values, string_literal_quotes):
         self.string = string
+        self.values = values
         self.string_literal_quotes = string_literal_quotes
 
     def __iter__(self):
@@ -102,7 +103,7 @@ class ExpressionString:
             if not (self.parse_flags & ParseFlag.PRIMARY):
                 raise Exception("Unexpected Variable")
             self.token_counter += 1
-            token = variable(self.token_counter - 1, self.scope_level)
+            token = VariableOperator(self.token_counter - 1, self.scope_level, variable)
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN
             return token
 
@@ -191,4 +192,20 @@ class ExpressionString:
         return False
 
     def GetVariable(self):
+        start_index = self.index
+        variable_name = ''
+
+        while self.index < len(self.string):
+            current_character = self.string[self.index]
+            if str(current_character).isnumeric() or str(current_character).isalpha() or current_character=='_':
+                self.index += 1
+                variable_name += current_character
+            else:
+                break
+
+        if len(variable_name) > 0:
+            if variable_name in self.values.keys():
+                return variable_name
+
+        self.index = start_index
         return False
