@@ -32,3 +32,5 @@ class BasicExpressionTestMethods(unittest.TestCase):
 
     def test_comment(self):
         self.assertEqual(Expression("'test' 1 + 1").evaluate(), [2])
+        self.assertEqual(Expression("1 + 'test'1").evaluate(), [2])
+        self.assertEqual(Expression("1 'test'+ 1").evaluate(), [2])
