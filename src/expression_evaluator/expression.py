@@ -29,7 +29,7 @@ class Expression:
                 evaluation_stack.append(token.function(n1))
             else:
                 raise Exception("Invalid Expression!")
-        return evaluation_stack[0]
+        return evaluation_stack
 
 #    def evaluate(self, values={}):
 #        nstack = []

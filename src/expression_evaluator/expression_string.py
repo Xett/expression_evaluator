@@ -1,4 +1,5 @@
 import re
+from expression_evaluator.operators import basic
 from expression_evaluator.token import *
 from expression_evaluator.operator import *
 
@@ -15,8 +16,6 @@ class ExpressionString:
         return self
 
     def __next__(self):
-        initial_index = self.index
-        
         # Stop iterating if we have moved past the string
         if self.index >= len(self.string):
             if self.scope_level != 0:
@@ -35,7 +34,6 @@ class ExpressionString:
                     self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
                     self.token_counter += 1
                     token = basic_operator(self.token_counter - 1, self.scope_level)
-                    token.priority += 5
                     return token
             self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
 
@@ -84,8 +82,10 @@ class ExpressionString:
                 raise Exception("Unexpected \"(\"")
             elif self.parse_flags & ParseFlag.CALL_START:
                 self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN | ParseFlag.CALL_END
-                self.scope_level += 1
-                self.index += 1
+            self.scope_level += 1
+            self.index += 1
+            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN | ParseFlag.CALL_END
+            return self.__next__()
 
         # Check for right parenthesis
         if self.IsRightParenthesis():
@@ -98,11 +98,17 @@ class ExpressionString:
                 token = Token(self.token_counter - 1, self.scope_level)
                 self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN | ParseFlag.CALL_START
                 return token
+            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN | ParseFlag.CALL_START
+            self.scope_level -= 1
+            self.index += 1
+            return self.__next__()
 
         # Check for comma
         if self.IsComma():
             if not (self.parse_flags & ParseFlag.COMMA):
                 raise Exception("Unexpected \",\"")
+            self.index += 1
+            return self.__next__()
 
         # Check for constants
         constant = self.GetConstant()
@@ -126,8 +132,6 @@ class ExpressionString:
         # Step forward if we are on whitespace
         if self.IsWhitespace():
             self.index += 1
-
-        if initial_index != self.index:
             return self.__next__()
         
         raise Exception('Invalid character! - ' + self.string[self.index])
@@ -148,12 +152,13 @@ class ExpressionString:
         return self.string[self.index - 4: self.index] == 'not '
 
     def GetBasicOperator(self):
+        basic_operator = False
         for operator in Operators(TokenType.BasicOperator):
             for symbol in operator.symbols:
                 if self.string.startswith(symbol, self.index):
                     self.index += len(symbol)
-                    return operator
-        return False
+                    basic_operator = operator
+        return basic_operator
 
     def GetAdvanceOperator(self):
         for operator in Operators(TokenType.AdvanceOperator):

@@ -137,26 +137,6 @@ class Parser:
         #if (noperators + 1) != len(token_stack):
         #    self.error_parsing(expression, position, 'parity')
 
-    #def evaluate(self, expr, variables):
-    #    return self.parse(expr).evaluate(variables)
-
-    def error_parsing(self, expression, column, msg):
-        raise Exception('parse error [column ' + str(column) + ']: ' + msg + ', expression: ' + expression)
-
-    #def addfunc(self, tokenstack, operstack, type_):
-    #    operator = Token(
-    #        type_,
-    #        self.tokenindex,
-    #        self.tokenprio + self.tmpprio,
-    #        0,
-    #    )
-    #    while len(operstack) > 0:
-    #        if operator.prio_ <= operstack[len(operstack) - 1].prio_:
-    #            tokenstack.append(operstack.pop())
-    #        else:
-    #            break
-    #    operstack.append(operator)
-
     #def isNumber(self):
     #    r = False
 
@@ -275,22 +255,6 @@ class Parser:
     #                self.pos += L
     #                return True
     #    return False
-
-    #def isSign(self):
-    #    code = self.expression[self.pos - 1]
-    #    return (code == '+') or (code == '-')
-
-    #def isPositiveSign(self):
-    #    code = self.expression[self.pos - 1]
-    #    return code == '+'
-
-    #def isNegativeSign(self):
-    #    code = self.expression[self.pos - 1]
-    #    return code == '-'
-
-    #def isLogicalNot(self):
-    #    code = self.expression[self.pos - 4: self.pos]
-    #    return code == 'not '
 
     #def isLeftParenth(self):
     #    code = self.expression[self.pos]

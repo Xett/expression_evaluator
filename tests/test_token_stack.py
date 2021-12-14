@@ -15,14 +15,14 @@ class TokenStackTestMethods(unittest.TestCase):
         token_stack.add(token_2)
 
         self.assertEqual(len(token_stack), 2)
-        self.assertEqual(len(token_stack.stack[0]), 2)
+        self.assertEqual(len(token_stack.stack[9]), 2)
 
         token_3 = Token(2, 0)
         token_3.priority = 1
         token_stack.add(token_3)
 
         self.assertEqual(len(token_stack), 3)
-        self.assertEqual(len(token_stack.stack[0]), 2)
+        self.assertEqual(len(token_stack.stack[9]), 2)
         self.assertEqual(len(token_stack.stack[1]), 1)
 
     def test_token_stack_iteration(self):
@@ -43,13 +43,13 @@ class TokenStackTestMethods(unittest.TestCase):
         token_stack = TokenStack()
         token_stack.add(token_1)
 
-        self.assertEqual(token_stack.priority_order(), [0])
+        self.assertEqual(token_stack.priority_order(), [9])
         
         token_2 = Token(0, 0)
         token_2.priority = 1
         token_stack.add(token_2)
 
-        self.assertEqual(token_stack.priority_order(), [0, 1])
+        self.assertEqual(token_stack.priority_order(), [9, 1])
 
     def test_current_priority(self):
         token_1 = Token(0, 0)
