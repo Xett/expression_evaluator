@@ -133,12 +133,13 @@ class ExpressionString:
         return basic_operator
 
     def GetAdvanceOperator(self):
+        advance_operator = False
         for operator in Operators(TokenType.AdvanceOperator):
             for symbol in operator.symbols:
                 if self.string.startswith(symbol, self.index):
                     self.index += len(symbol)
-                    return operator
-        return False
+                    advance_operator = operator
+        return advance_operator 
 
     def GetNumber(self):
         # Check for scientific notation numbers
