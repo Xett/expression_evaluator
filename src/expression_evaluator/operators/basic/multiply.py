@@ -2,7 +2,7 @@ from expression_evaluator.token import *
 
 class Multiply(BasicOperator):
     symbols = ['*']
-    priority = 5
+    priority = PriorityLevel.Multiply
 
     @classmethod
     def _function(cls, a, b):

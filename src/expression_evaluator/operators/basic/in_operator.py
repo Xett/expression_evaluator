@@ -2,7 +2,7 @@ from expression_evaluator.token import *
 
 class InOperator(BasicOperator):
     symbols = ['in']
-    priority = 3
+    priority = PriorityLevel.String
 
     @classmethod
     def _function(cls, a, b):

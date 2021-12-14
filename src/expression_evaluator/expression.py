@@ -16,18 +16,18 @@ class Expression:
         evaluation_stack = [] # Holds the numbers we use to evaluate
         values = kwargs
         for token in self:
-            if token.type & TokenType.Number:
+            if token.type == TokenType.Number:
                 evaluation_stack.append(token.value)
-            elif token.type & TokenType.BasicOperator:
+            elif token.type == TokenType.BasicOperator:
                 n2 = evaluation_stack.pop()
                 n1 = evaluation_stack.pop()
                 evaluation_stack.append(token.function(n1, n2))
-            elif token.type & TokenType.Variable:
+            elif token.type == TokenType.Variable:
                 return
-            elif token.type & TokenType.AdvanceOperator:
+            elif token.type == TokenType.AdvanceOperator:
                 n1 = evaluation_stack.pop()
                 evaluation_stack.append(token.function(n1))
-            elif token.type & TokenType.Constant:
+            elif token.type == TokenType.Constant:
                 evaluation_stack.append(token.function())
             else:
                 raise Exception("Invalid Expression!")

@@ -4,18 +4,18 @@ from dataclasses import dataclass
 class Token:
     type = TokenType.Number
     token_id: int = 0
-    priority = 9
+    priority = PriorityLevel.Number
     value: int = 0
 
     def __init__(self, token_id: int, scope_level, value=0):
         self.token_id = token_id
         self.value = value
-        self.priority += scope_level * 10
+        self.priority_level = int(self.priority.value) + (scope_level * 10)
 
     def __str__(self):
-        if self.type & TokenType.Number:
+        if self.type == TokenType.Number:
             return str(self.value)
-        if self.type & (TokenType.BasicOperator | TokenType.AdvanceOperator | TokenType.Variable):
+        if self.type == TokenType.BasicOperator or self.type == TokenType.AdvanceOperator or self.type == TokenType.Variable:
             return str(type(self))
         else:
             return 'Invalid Token'
@@ -24,6 +24,7 @@ class Operator(Token):
     type = TokenType.INVALID
     is_sign = False
     symbols = []
+    priority = PriorityLevel.Operator
 
     def __init__(self, token_id, scope_level):
         super().__init__(token_id, scope_level)
@@ -38,11 +39,11 @@ class Operator(Token):
 
 class BasicOperator(Operator):
     type = TokenType.BasicOperator
-    priority = 5
+    priority = PriorityLevel.Operator
 
 class AdvanceOperator(Operator):
     type = TokenType.AdvanceOperator
-    priority = 5
+    priority = PriorityLevel.Operator
 
 class ConstantOperator(Operator):
     type = TokenType.Constant
@@ -96,6 +97,6 @@ class TokenStack:
         return self.stack[priority_level]
 
     def add(self, token):
-        if token.priority not in self.stack.keys():
-            self.stack[token.priority] = []
-        self.stack[token.priority].append(token)
+        if token.priority_level not in self.stack.keys():
+            self.stack[token.priority_level] = []
+        self.stack[token.priority_level].append(token)

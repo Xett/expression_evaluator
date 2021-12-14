@@ -2,7 +2,7 @@ from expression_evaluator.token import *
 
 class GreaterThanEqual(BasicOperator):
     symbols = ['>=']
-    priority = 3
+    priority = PriorityLevel.Boolean
 
     @classmethod
     def _function(cls, a, b):

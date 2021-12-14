@@ -3,7 +3,7 @@ from expression_evaluator.token import *
 class Add(BasicOperator):
     is_sign = True
     symbols = ['+']
-    priority = 5
+    priority = PriorityLevel.Add
 
     @classmethod    
     def _function(cls, a, b):

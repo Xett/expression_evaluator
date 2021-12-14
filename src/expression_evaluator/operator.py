@@ -17,7 +17,7 @@ class Operators:
         def GetByType(self, type):
             operators = []
             for operator in self.operators:
-                if operator.type & type:
+                if operator.type == type:
                     operators.append(operator)
             return sorted(operators, key=lambda x : x.priority, reverse=True)
 
@@ -33,7 +33,7 @@ class Operators:
                 raise StopIteration
 
             self.index += 1
-            return self.operators[self.index - 1]
+            return sorted(self.operators, key=lambda x : x.priority, reverse=True)[self.index - 1]
     
     instance = None
 

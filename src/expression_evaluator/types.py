@@ -1,6 +1,6 @@
-from enum import Enum, IntFlag
+from enum import Enum, IntFlag, IntEnum
 
-class TokenType(IntFlag):
+class TokenType(Enum):
     INVALID = 0
     Number = 1
     BasicOperator = 2
@@ -19,93 +19,15 @@ class ParseFlag(IntFlag):
     CALL_START = 128
     CALL_END = 256
 
-#ops1 = {
-#    'sin': math.sin,
-#    'cos': math.cos,
-#    'tan': math.tan,
-#    'asin': math.asin,
-#    'acos': math.acos,
-#    'atan': math.atan,
-#
-#    'sind': sind,
-#    'cosd': cosd,
-#    'tand': tand,
-#    'asind': asind,
-#    'acosd': acosd,
-#    'atand': atand,
-#
-#    'sqrt': math.sqrt,
-#    'abs': abs,
-#    'ceil': math.ceil,
-#    'floor': math.floor,
-#    'round': round,
-#    '-': neg,
-#    'not': notOperator,
-#    'exp': math.exp,
-#}
-
-#ops2 = {
-#    '+': add,
-#    '-': sub,
-#    '*': mul,
-#    '/': div,
-#    '%': mod,
-#    '^': pow,
-#    '**': pow,
-#    ',': append,
-#    '||': concat,
-#    "==": equal,
-#    "!=": notEqual,
-#    ">": greaterThan,
-#    "<": lessThan,
-#    ">=": greaterThanEqual,
-#    "<=": lessThanEqual,
-#    "and": andOperator,
-#    "or": orOperator,
-#    "xor": xorOperator,
-#    "in": inOperator,
-#    "D": roll
-#}
-
-#functions = {
-#    'random': random,
-#    'fac': fac,
-#    'log': math.log,
-#    'min': min,
-#    'max': max,
-#    'pyt': pyt,
-#    'pow': math.pow,
-#    'atan2': math.atan2,
-#    'concat':concat,
-#    'if': ifFunction
-#}
-
-#consts = {
-#    'E': math.e,
-#    'PI': math.pi,
-#}
-
-#values = {
-#    'sin': math.sin,
-#    'cos': math.cos,
-#    'tan': math.tan,
-#    'asin': math.asin,
-#    'acos': math.acos,
-#    'atan': math.atan,
-#    'sqrt': math.sqrt,
-#    'log': math.log,
-#    'abs': abs,
-#    'ceil': math.ceil,
-#    'floor': math.floor,
-#    'round': round,
-#    'random': random,
-#    'fac': fac,
-#    'exp': math.exp,
-#    'min': min,
-#    'max': max,
-#    'pyt': pyt,
-#    'pow': math.pow,
-#    'atan2': math.atan2,
-#    'E': math.e,
-#    'PI': math.pi
-#}
+class PriorityLevel(IntEnum):
+    Operator = 0
+    Roll = 1
+    And = 1
+    String = 3
+    Boolean = 3
+    Subtract = 4
+    Add = 5
+    Multiply = 5
+    Divide = 6
+    Power = 8
+    Number = 9

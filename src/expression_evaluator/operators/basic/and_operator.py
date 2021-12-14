@@ -2,7 +2,7 @@ from expression_evaluator.token import *
 
 class AndOperator(BasicOperator):
     symbols = ['and']
-    priority = 1
+    priority = PriorityLevel.And
 
     @classmethod
     def _function(cls, a, b):

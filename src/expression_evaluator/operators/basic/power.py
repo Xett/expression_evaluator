@@ -2,7 +2,7 @@ from expression_evaluator.token import *
 
 class Power(BasicOperator):
     symbols = ['^', '**']
-    priority = 8
+    priority = PriorityLevel.Power
 
     @classmethod
     def _function(cls, a, b):
