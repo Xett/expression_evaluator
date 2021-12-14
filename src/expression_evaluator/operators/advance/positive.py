@@ -1,10 +1,10 @@
 from expression_evaluator.token import *
 
-class Negative(AdvanceOperator):
+class Positive(AdvanceOperator):
     is_sign = True
-    symbols = ['-']
+    symbols = ['+']
     priority = PriorityLevel.Sign
 
     @classmethod
     def _function(cls, a):
-        return -a
+        return a

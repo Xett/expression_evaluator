@@ -24,7 +24,7 @@ class PriorityLevel(IntEnum):
     Boolean = 3
     Subtract = 4
     Not = 5
-    Negative = 5
+    Sign = 5
     Add = 5
     Multiply = 5
     Divide = 6

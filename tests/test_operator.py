@@ -25,7 +25,7 @@ class TestOperatorsMethods(unittest.TestCase):
         self.assertEqual(len(Operators(TokenType.BasicOperator)), 20, self.fail_messages[2])
 
     def test_advanced_operators_loaded(self):
-        self.assertEqual(len(Operators(TokenType.AdvanceOperator)), 28, self.fail_messages[3])
+        self.assertEqual(len(Operators(TokenType.AdvanceOperator)), 29, self.fail_messages[3])
     
     def test_constant_operators_loaded(self):
         self.assertEqual(len(Operators(TokenType.Constant)), 2, self.fail_messages[5])
