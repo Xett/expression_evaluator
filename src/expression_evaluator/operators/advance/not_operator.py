@@ -2,7 +2,7 @@ from expression_evaluator.token import *
 
 class NotOperator(AdvanceOperator):
     symbols = ['not']
-    priority = 5
+    priority = PriorityLevel.Not
 
     @classmethod
     def _function(a):

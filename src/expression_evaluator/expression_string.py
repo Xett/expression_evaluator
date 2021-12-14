@@ -55,8 +55,12 @@ class ExpressionString:
 
         advance_operator = self.GetAdvanceOperator()
         if advance_operator:
-            if not (self.parse_flags & ParseFlag.OPERATOR):
-                raise Exception('Unexpected Advance Operator')
+            if not (self.parse_flags & ParseFlag.OPERATOR) and not (self.parse_flags & ParseFlag.SIGN):
+                raise Exception('Unexpected Advance Operator')                
+            elif self.parse_flags & ParseFlag.SIGN:
+                self.parse_flags = self.default_parse_flags
+                self.token_counter += 1
+                return advance_operator(self.token_counter - 1, self.scope_level)
             self.parse_flags = self.default_parse_flags
             self.token_counter += 1
             token = advance_operator(self.token_counter - 1, self.scope_level)
@@ -128,8 +132,9 @@ class ExpressionString:
         for operator in Operators(TokenType.BasicOperator):
             for symbol in operator.symbols:
                 if self.string.startswith(symbol, self.index):
-                    self.index += len(symbol)
-                    basic_operator = operator
+                    if not (self.parse_flags & ParseFlag.SIGN):
+                        self.index += len(symbol)
+                        basic_operator = operator
         return basic_operator
 
     def GetAdvanceOperator(self):

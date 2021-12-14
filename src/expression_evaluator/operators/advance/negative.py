@@ -3,7 +3,7 @@ from expression_evaluator.token import *
 class Negative(AdvanceOperator):
     is_sign = True
     symbols = ['-']
-    priority = 5
+    priority = PriorityLevel.Negative
 
     @classmethod
     def _function(cls, a):

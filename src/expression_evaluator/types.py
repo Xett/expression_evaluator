@@ -23,6 +23,8 @@ class PriorityLevel(IntEnum):
     String = 3
     Boolean = 3
     Subtract = 4
+    Not = 5
+    Negative = 5
     Add = 5
     Multiply = 5
     Divide = 6

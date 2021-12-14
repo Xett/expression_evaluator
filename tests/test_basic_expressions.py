@@ -38,3 +38,6 @@ class BasicExpressionTestMethods(unittest.TestCase):
     def test_variable(self):
         kwargs = {'a' : 1}
         self.assertEqual(Expression("a + 1", **kwargs).evaluate(), [2])
+
+    def test_negative(self):
+        self.assertEqual(Expression("-3").evaluate(), [-3])
