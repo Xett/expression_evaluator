@@ -82,14 +82,14 @@ class ExpressionString:
                 raise Exception("Unexpected \"(\"")
             self.scope_level += 1
             self.index += 1
-            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN | ParseFlag.CALL_END
+            self.parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.FUNCTION | ParseFlag.SIGN
             return self.__next__()
 
         # Check for right parenthesis
         if self.IsRightParenthesis():
             if not (self.parse_flags & ParseFlag.RPAREN):
                 raise Exception("Unexpected \")\"")
-            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN | ParseFlag.CALL_START
+            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN
             self.scope_level -= 1
             self.index += 1
             return self.__next__()
@@ -117,7 +117,7 @@ class ExpressionString:
                 raise Exception("Unexpected Variable")
             self.token_counter += 1
             token = variable(self.token_counter - 1, self.scope_level)
-            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN | ParseFlag.CALL_START
+            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN
             return token
 
         # Step forward if we are on whitespace

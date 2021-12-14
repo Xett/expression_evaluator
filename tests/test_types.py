@@ -18,5 +18,16 @@ class TestTypesMethods(unittest.TestCase):
         self.assertIsInstance(ParseFlag.RPAREN, ParseFlag)
         self.assertIsInstance(ParseFlag.COMMA, ParseFlag)
         self.assertIsInstance(ParseFlag.SIGN, ParseFlag)
-        self.assertIsInstance(ParseFlag.CALL_START, ParseFlag)
-        self.assertIsInstance(ParseFlag.CALL_END, ParseFlag)
+
+    def test_priority_level(self):
+        self.assertIsInstance(PriorityLevel.Operator, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.Roll, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.And, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.String, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.Boolean, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.Subtract, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.Add, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.Multiply, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.Divide, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.Power, PriorityLevel)
+        self.assertIsInstance(PriorityLevel.Number, PriorityLevel)

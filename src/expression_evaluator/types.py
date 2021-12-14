@@ -1,6 +1,6 @@
-from enum import Enum, IntFlag, IntEnum
+from enum import *
 
-class TokenType(Enum):
+class TokenType(IntEnum):
     INVALID = 0
     Number = 1
     BasicOperator = 2
@@ -16,8 +16,6 @@ class ParseFlag(IntFlag):
     RPAREN = 16
     COMMA = 32
     SIGN = 64
-    CALL_START = 128
-    CALL_END = 256
 
 class PriorityLevel(IntEnum):
     Operator = 0
