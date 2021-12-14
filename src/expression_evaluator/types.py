@@ -14,7 +14,7 @@ class ParseFlag(IntFlag):
     LPAREN = 4
     RPAREN = 8
     COMMA = 16
-    SIGN = 32
+    AdvancedOperator = 32
 
 class PriorityLevel(IntEnum):
     Operator = 0

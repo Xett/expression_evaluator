@@ -3,7 +3,7 @@ from expression_evaluator.token import *
 from expression_evaluator.operator import *
 
 class ExpressionString:
-    default_parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.SIGN
+    default_parse_flags = ParseFlag.PRIMARY | ParseFlag.LPAREN | ParseFlag.AdvancedOperator
     def __init__(self, string, values, string_literal_quotes):
         self.string = string
         self.values = values
@@ -22,26 +22,13 @@ class ExpressionString:
             if self.scope_level != 0:
                 raise Exception("Unmatched \"()\"")
             raise StopIteration
+        print(self.parse_flags)
         
         # Step forward if we are on whitespace
         if self.IsWhitespace():
             self.index += 1
             return self.__next__()
         
-        # Check for comments
-        if self.GetString():
-            return self.__next__()
-
-        # Check for numbers
-        number = self.GetNumber()
-        if not isinstance(number, bool):
-            if not (self.parse_flags & ParseFlag.PRIMARY):
-                raise Exception("Unexpected Number")
-            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
-            self.token_counter += 1
-            if number.isdecimal():
-                return Token(self.token_counter-1, self.scope_level, int(number))
-            return Token(self.token_counter-1, self.scope_level, float(number))
 
         # Check for basic operators first
         basic_operator = self.GetBasicOperator()
@@ -55,16 +42,23 @@ class ExpressionString:
 
         advance_operator = self.GetAdvanceOperator()
         if advance_operator:
-            if not (self.parse_flags & ParseFlag.OPERATOR) and not (self.parse_flags & ParseFlag.SIGN):
-                raise Exception('Unexpected Advance Operator')                
-            elif self.parse_flags & ParseFlag.SIGN:
-                self.parse_flags = self.default_parse_flags
-                self.token_counter += 1
-                return advance_operator(self.token_counter - 1, self.scope_level)
+            if not (self.parse_flags & ParseFlag.AdvancedOperator):
+                raise Exception('Unexpected Advance Operator')
             self.parse_flags = self.default_parse_flags
             self.token_counter += 1
             token = advance_operator(self.token_counter - 1, self.scope_level)
             return token
+
+        # Check for numbers
+        number = self.GetNumber()
+        if not isinstance(number, bool):
+            if not (self.parse_flags & ParseFlag.PRIMARY):
+                raise Exception("Unexpected Number")
+            self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA
+            self.token_counter += 1
+            if number.isdecimal():
+                return Token(self.token_counter-1, self.scope_level, int(number))
+            return Token(self.token_counter-1, self.scope_level, float(number))
 
         # Check for left parenthesis
         if self.IsLeftParenthesis():
@@ -110,6 +104,10 @@ class ExpressionString:
             self.parse_flags = ParseFlag.OPERATOR | ParseFlag.RPAREN | ParseFlag.COMMA | ParseFlag.LPAREN
             return token
 
+        # Check for comments
+        if self.GetString():
+            return self.__next__()
+        
         raise Exception('Invalid character! - ' + self.string[self.index])
 
     def IsWhitespace(self):
@@ -132,7 +130,7 @@ class ExpressionString:
         for operator in Operators(TokenType.BasicOperator):
             for symbol in operator.symbols:
                 if self.string.startswith(symbol, self.index):
-                    if not (self.parse_flags & ParseFlag.SIGN):
+                    if not (self.parse_flags & ParseFlag.AdvancedOperator):
                         self.index += len(symbol)
                         basic_operator = operator
         return basic_operator

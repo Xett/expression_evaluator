@@ -16,7 +16,7 @@ class TestTypesMethods(unittest.TestCase):
         self.assertIsInstance(ParseFlag.LPAREN, ParseFlag)
         self.assertIsInstance(ParseFlag.RPAREN, ParseFlag)
         self.assertIsInstance(ParseFlag.COMMA, ParseFlag)
-        self.assertIsInstance(ParseFlag.SIGN, ParseFlag)
+        self.assertIsInstance(ParseFlag.AdvancedOperator, ParseFlag)
 
     def test_priority_level(self):
         self.assertIsInstance(PriorityLevel.Operator, PriorityLevel)

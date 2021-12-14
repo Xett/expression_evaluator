@@ -44,3 +44,6 @@ class BasicExpressionTestMethods(unittest.TestCase):
 
     def test_positive(self):
         self.assertEqual(Expression("+3").evaluate(), [3])
+
+    def test_floor(self):
+        self.assertEqual(Expression("floor(3)").evaluate(), [3])
