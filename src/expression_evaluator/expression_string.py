@@ -28,9 +28,8 @@ class ExpressionString:
             self.index += 1
             return self.__next__()
         
-        # Check for 
-        string = self.GetString()
-        if string:
+        # Check for comments
+        if self.GetString():
             return self.__next__()
 
         # Check for numbers
