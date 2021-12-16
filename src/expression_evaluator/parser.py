@@ -5,7 +5,7 @@ from expression_evaluator.token_stack import *
 
 class Parser:
 
-    def __init__(self, values={}, string_literal_quotes = ("'", "\"")):
+    def __init__(self, values, string_literal_quotes = ("'", "\"")):
         self.string_literal_quotes = string_literal_quotes
         self.values = values
         self.success = False

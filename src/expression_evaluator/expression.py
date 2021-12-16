@@ -5,7 +5,7 @@ from expression_evaluator.operator import *
 
 class Expression:
 
-    def __init__(self, string: str, **kwargs):
+    def __init__(self, string: str, kwargs={}):
         self.string = string
         self.values = kwargs
         self.token_stack = Parser(self.values).parse(string)
